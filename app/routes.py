@@ -2,6 +2,7 @@ import os
 from app import app
 from flask import render_template, request, redirect
 
+
 events = [{"event_name":"Guitar Recital", "event_date":"4/15/2019"},
     {"event_name":"Poetry Slam Competition", "event_date":"5/4/2019"},
     {"event_name":"Community Board Meeting", "event_date":"6/23/2019"}]

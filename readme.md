@@ -45,7 +45,9 @@ Take a look at what currently exists. We'll start at our controller: the `routes
 
   Take some time to follow the flow of the code here.
 
-## Part 2: Getting Set Up With Firebase
+## Part 2: Working with Firebase
+
+### Database Setup
 
 In order to replace our array of dictionaries with a real database, we need to do some basic setup on Firebase. Head to [firebase.google.com](www.firebase.google.com), sign up, and then create a new project.
 
@@ -57,15 +59,26 @@ Go through the popup and give your project a (relevant) name:
 
 Congratulations! You've initialized your first Firebase project! You're not quite there yet though.
 
-Once you see your dashboard, head over to the database section and click on "create database". You'll want to start your database up in "test mode" so that you don't need user authentication quite yet.
+Once you see your dashboard, head over to the database section and click on "create database".
 
 <img src="screenshots/create-database.png" width="600">
+
+You'll want to start your database up in "test mode" so that you don't need user authentication quite yet.
+
 <img src="screenshots/testmode.png" width="400">
 
 Once the database is created, make sure you switch the dropdown from "cloud firestore" to "realtime database":
 
 <img src="screenshots/realtime-db.png" width="300">
 
+### Installing Pyrebase
+
+We're going to use a Python wrapper for the Firebase API called Pyrebase. Let's add it to our project by running:
+
+```bash
+pip install pyrebase
+```
+In our routes.py file, add `import pyrebase` to the import section at the top of the page.
 
 ## References and Resources
 
