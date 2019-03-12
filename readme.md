@@ -33,6 +33,18 @@ flask run
 ```
 This will fire up the local server, and get your app running at the default port 8080. Open it up in a browser by navigating to http://localhost:8080/
 
+### Examine the existing codebase
+
+Take a look at what currently exists. We'll start at our controller: the `routes.py` file. In this file we see:
+
+* Importing packages that we currently need.
+* A global variable `events` that is holding an array of dictionaries with each event's information. We'll eventually replace this with a Firebase database.
+* Our routes and the functions that are called when those routes are triggered by a url.
+  * When '/' or '/index' are triggered, the index() function is run and the `index.html` template is rendered. We pass in the `events` variable to be templated in using jinja2.
+  * When '/events/new' is triggered, the new_event.html page is rendered, with a form that posts event data back to the controller. In the controller, the form data is unpacked from the request and appended to the `events` variable. After this is done we redirect back to the '/' route.
+
+  Take some time to follow the flow of the code here. 
+
 ## Part 2: Replacing Dictionaries with Firebase
 
 

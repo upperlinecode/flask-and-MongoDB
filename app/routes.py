@@ -9,7 +9,6 @@ events = [{"event_name":"Guitar Recital", "event_date":"4/15/2019"},
 @app.route('/')
 @app.route('/index')
 
-
 def index():
     return render_template('index.html', events = events)
 
