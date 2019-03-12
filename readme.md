@@ -6,7 +6,7 @@ The project we're going to be building out is an **community event event board**
 
 Note: We're assuming some knowledge of Flask already since we're not starting from scratch. You should be able to create a basic app using routes, jinja2 templates, forms, and static files. If this sounds like gibberish, first go study these at_____________(fill this in).
 
-## Part 1: Clone the Template Flask App.
+## Part 1: Flask Starter Code
 
 ### Initial setup
 
@@ -43,10 +43,17 @@ Take a look at what currently exists. We'll start at our controller: the `routes
   * When '/' or '/index' are triggered, the index() function is run and the `index.html` template is rendered. We pass in the `events` variable to be templated in using jinja2.
   * When '/events/new' is triggered, the new_event.html page is rendered, with a form that posts event data back to the controller. In the controller, the form data is unpacked from the request and appended to the `events` variable. After this is done we redirect back to the '/' route.
 
-  Take some time to follow the flow of the code here. 
+  Take some time to follow the flow of the code here.
 
-## Part 2: Replacing Dictionaries with Firebase
+## Part 2: Getting Set Up With Firebase
 
+In order to replace our array of dictionaries with a real database, we need to do some basic setup on Firebase. Head to [firebase.google.com](www.firebase.google.com), sign up, and then create a new project.
+
+![new project](screenshots/newproject.png)
+
+Go through the popup and give your project a (relevant) name:
+
+![create project](screenshots/createproject.png)
 
 ## References and Resources
 
