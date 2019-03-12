@@ -8,6 +8,8 @@ Note: We're assuming some knowledge of Flask already since we're not starting fr
 
 ## Part 1: Clone the Template Flask App.
 
+### Initial setup
+
 We're going to start by downloading and opening a template that will get us going without too much setup.
 
 ```bash
@@ -15,14 +17,21 @@ git clone https://github.com/upperlinecode/using-firebase-and-flask
 cd using-firebase-and-flask
 rm -rf .git
 ```
-Once you've done this, open the project in your text editor, and then run the following commands to install the flask and python-dotenv (for our environment variables) packages:
+Once you've done this, open the project in your text editor, and then run the following commands in the terminal to install the flask and python-dotenv (for our environment variables) packages:
 
 ```bash
 pip install flask
 pip install python-dotenv
 ```
 
+### Run the application
 
+Run the app by typing the following command in to your terminal:
+
+```bash
+flask run
+```
+This will fire up the local server, and get your app running at the default port 8080. Open it up in a browser by navigating to http://localhost:8080/
 
 ## Part 2: Replacing Dictionaries with Firebase
 

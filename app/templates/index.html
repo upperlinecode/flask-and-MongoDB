@@ -1,9 +1,19 @@
 <html>
     <head>
-        <title>Welcome!</title>
+        <title>Community Events</title>
     </head>
     <body>
-        <h1>Hello world!</h1>
-        <p>We can build a full webpage here</p>
+      <div class="header">
+        <h1>Community Events</h1>
+        <p>Your source for great events.</p>
+      </div>
+      <div class="event-list">
+        <ul>
+          {% for event in events %}
+            <li>{{ event.event_name }} - {{ event.event_date }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+
     </body>
 </html>
