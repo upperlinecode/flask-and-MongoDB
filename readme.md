@@ -82,15 +82,11 @@ In our routes.py file, add `import pyrebase` to the import section at the top of
 
 ### Connecting to your Firebase DB
 
-To connect to your firebase database, you'll need to set up a dictionary variable with your configuration data.
-
-**Important: Do not expose your API Key or the JSON file with your private key! Put your API key in an environment variable in your `.env` file - and make sure not to upload that file to github (it is ignored by default in this repository)!**
-
-You'll also want to go to your settings -> Service Accounts and then generate a new private key. That will download a JSON file that you can connect to your config variables. In the example below, we renamed the JSON file `firebase-private-key.json` - we also added that file to the `.gitignore` so that it doesn't get tracked by git and uploaded to github:
+To connect to your firebase database, you'll need to set up a dictionary variable with your configuration data in your `routes.py` file. The `authDomain`, `databaseURL`, `projectId`, and `storageBucket` should all use the name you gave your firebase project during setup.
 
 ```js
 config = {
-  "apiKey": os.environ['FIREBASE_APIKEY'],
+  "apiKey": os.environ['FIREBASE_API_KEY'],
   "authDomain": "community-event-manager.firebaseapp.com",
   "databaseURL": "https://community-event-manager.firebaseio.com",
   "projectId": "community-event-manager",
@@ -98,6 +94,20 @@ config = {
   "serviceAccount": "app/firebase-private-key.json",
   "messagingSenderId": "1052538486567"
 }```
+
+** Important: Do not expose your API Key or the JSON file with your private key! Put your API key in an environment variable in your `.env` file - and make sure not to upload that file to github (it is ignored by default in this repository)! **
+
+This is what your .env file (in the root directory of your project) should look like:
+
+```
+LC_ALL=C.UTF-8
+LANG=C.UTF-8
+FIREBASE_API_KEY=AIzaSyCn1qXoa7sdfe7vgyce9E71SbcBa3s
+```
+
+You'll also want to go to your settings -> Service Accounts and then generate a new private key. That will download a JSON file that you can connect to your config variables. In the example below, we renamed the JSON file `firebase-private-key.json` - we also added that file to the `.gitignore` so that it doesn't get tracked by git and uploaded to github.
+
+
 
 ## References and Resources
 
