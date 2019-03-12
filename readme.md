@@ -49,11 +49,23 @@ Take a look at what currently exists. We'll start at our controller: the `routes
 
 In order to replace our array of dictionaries with a real database, we need to do some basic setup on Firebase. Head to [firebase.google.com](www.firebase.google.com), sign up, and then create a new project.
 
-![new project](screenshots/newproject.png)
+<img src="screenshots/newproject.png" width="400">
 
 Go through the popup and give your project a (relevant) name:
 
-![create project](screenshots/createproject.png)
+<img src="screenshots/createproject.png" width="400">
+
+Congratulations! You've initialized your first Firebase project! You're not quite there yet though.
+
+Once you see your dashboard, head over to the database section and click on "create database". You'll want to start your database up in "test mode" so that you don't need user authentication quite yet.
+
+<img src="screenshots/create-database.png" width="600">
+<img src="screenshots/testmode.png" width="400">
+
+Once the database is created, make sure you switch the dropdown from "cloud firestore" to "realtime database":
+
+<img src="screenshots/realtime-db.png" width="300">
+
 
 ## References and Resources
 
