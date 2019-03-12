@@ -18,6 +18,9 @@ config = {
   "messagingSenderId": "1052538486567"
 }
 
+firebase = pyrebase.initialize_app(config)
+db = firebase.database()
+
 @app.route('/')
 @app.route('/index')
 

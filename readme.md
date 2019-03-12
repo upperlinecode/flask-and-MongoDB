@@ -73,7 +73,7 @@ Once the database is created, make sure you switch the dropdown from "cloud fire
 
 ### Installing Pyrebase
 
-We're going to use a Python wrapper for the Firebase API called Pyrebase. Let's add it to our project by running:
+We're going to use a Python wrapper for the Firebase API called [Pyrebase](https://github.com/thisbejim/Pyrebase). Let's add it to our project by running:
 
 ```bash
 pip install pyrebase
@@ -84,7 +84,7 @@ In our routes.py file, add `import pyrebase` to the import section at the top of
 
 To connect to your firebase database, you'll need to set up a dictionary variable with your configuration data in your `routes.py` file. The `authDomain`, `databaseURL`, `projectId`, and `storageBucket` should all use the name you gave your firebase project during setup.
 
-```js
+```python
 config = {
   "apiKey": os.environ['FIREBASE_API_KEY'],
   "authDomain": "community-event-manager.firebaseapp.com",
@@ -93,7 +93,8 @@ config = {
   "storageBucket": "community-event-manager.appspot.com",
   "serviceAccount": "app/firebase-private-key.json",
   "messagingSenderId": "1052538486567"
-}```
+}
+```
 
 ** Important: Do not expose your API Key or the JSON file with your private key! Put your API key in an environment variable in your `.env` file - and make sure not to upload that file to github (it is ignored by default in this repository)! **
 
@@ -107,7 +108,13 @@ FIREBASE_API_KEY=AIzaSyCn1qXoa7sdfe7vgyce9E71SbcBa3s
 
 You'll also want to go to your settings -> Service Accounts and then generate a new private key. That will download a JSON file that you can connect to your config variables. In the example below, we renamed the JSON file `firebase-private-key.json` - we also added that file to the `.gitignore` so that it doesn't get tracked by git and uploaded to github.
 
+Back to the routes.py file - once you've set up your config variable correctly, add the following code underneath:
 
+```Python
+firebase = pyrebase.initialize_app(config)
+db = firebase.database()
+```
+This code connects to our project using our configuration data, and then creates at `db` variable to interact with the Firebase database that we created earlier.
 
 ## References and Resources
 
