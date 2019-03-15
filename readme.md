@@ -120,6 +120,55 @@ This code connects to our project using our configuration data, and then creates
 
 You've hooked up your local application to your Firebase database using Pyrebase. Now it's time to start using the `db` variable you created earlier to get and send data to the database.
 
+### Sending data to Firebase
+
+Let's go back and take a look at what happens when the "New Event" form is posted to our controller.
+
+```python
+def new_event():
+    if request.method == "GET":
+        return render_template('new_event.html')
+    else:
+        new_event = dict(request.form)
+        events.append(new_event)
+        return redirect('/')
+```
+
+We currently append the `new_event` variable (that comes from the form) to the `events` list that we created earlier on. Unfortunately that events list will not persist (save) our data, so we're going to replace this with a call to our firebase `db` variable:
+
+```python
+def new_event():
+    if request.method == "GET":
+        return render_template('new_event.html')
+    else:
+        new_event = dict(request.form)
+        db.child("events").push(new_event) #replaces appending to events variable with firebase db call.
+        return redirect('/')
+```
+To test if this worked (you won't see anything change on the index page since we haven't updated it yet), head to the Firebase Console and open up your project, clicking on the 'database' section. You should see that the event you submitted is now a "node" in your database, under the node "events" (which was created as well since this was your first upload to that node - future submissions to `db.child("events")` will just add on to that node).
+
+<img src="screenshots/db-push.png" width="400">
+
+Try submitting a few more events to see what this looks like in the Firebase console.
+
+### Retrieving data from Firebase
+
+Now let's turn to pulling in our Firebase content, rather than sending new information to the database. We are currently doing this in the routing for our `/index` page by accessing the `events` list and sending it through to the template for rendering:
+
+```python
+def index():
+    return render_template('index.html', events = events)
+```
+
+Go ahead and delete the events variable defined at the top of the page - you're not going to need that anymore since you're moving to Firebase. Next, inside of our `index()` method we'll create a new variabe called `db_events` that pulls in the data we want from Firebase (the "events" node), and we'll pass that in to our template for rendering:
+
+```python
+def index():
+    db_events = db.child("events").get().val().values()
+    return render_template('index.html', events = db_events)
+```
+Now reload your app and you should hopefully see data getting pulled in from your Firebase database!
+
 ## References and Resources
 
 ## Setup:

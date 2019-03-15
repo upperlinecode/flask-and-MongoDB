@@ -4,10 +4,6 @@ from flask import render_template, request, redirect
 import pyrebase
 
 
-events = [{"event_name":"Guitar Recital", "event_date":"4/15/2019"},
-    {"event_name":"Poetry Slam Competition", "event_date":"5/4/2019"},
-    {"event_name":"Community Board Meeting", "event_date":"6/23/2019"}]
-
 config = {
   "apiKey": os.environ['FIREBASE_API_KEY'],
   "authDomain": "community-event-manager.firebaseapp.com",
@@ -25,7 +21,8 @@ db = firebase.database()
 @app.route('/index')
 
 def index():
-    return render_template('index.html', events = events)
+    db_events = db.child("events").get().val().values()
+    return render_template('index.html', events = db_events)
 
 # NEW EVENT
 
@@ -36,5 +33,6 @@ def new_event():
         return render_template('new_event.html')
     else:
         new_event = dict(request.form)
+        db.child("events").push(new_event)
         events.append(new_event)
         return redirect('/')
