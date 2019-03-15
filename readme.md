@@ -45,7 +45,7 @@ Take a look at what currently exists. We'll start at our controller: the `routes
 
   Take some time to follow the flow of the code here.
 
-## Part 2: Working with Firebase
+## Part 2: Firebase Setup
 
 ### Database Setup
 
@@ -106,7 +106,7 @@ LANG=C.UTF-8
 FIREBASE_API_KEY=AIzaSyCn1qXoa7sdfe7vgyce9E71SbcBa3s
 ```
 
-You'll also want to go to your settings -> Service Accounts and then generate a new private key. That will download a JSON file that you can connect to your config variables. In the example below, we renamed the JSON file `firebase-private-key.json` - we also added that file to the `.gitignore` so that it doesn't get tracked by git and uploaded to github.
+You'll also want to go to your settings -> Service Accounts and then generate a new private key. That will download a JSON file that you can connect to your config variables. In the example below, we renamed the JSON file `firebase-private-key.json` and we also added that file to the `.gitignore` so that it doesn't get tracked by git and uploaded to github.
 
 Back to the routes.py file - once you've set up your config variable correctly, add the following code underneath:
 
@@ -114,7 +114,11 @@ Back to the routes.py file - once you've set up your config variable correctly, 
 firebase = pyrebase.initialize_app(config)
 db = firebase.database()
 ```
-This code connects to our project using our configuration data, and then creates at `db` variable to interact with the Firebase database that we created earlier.
+This code connects to our project using our configuration data, and then creates a `db` variable to interact with the Firebase database that we created earlier.
+
+## Part 3: Using Firebase
+
+You've hooked up your local application to your Firebase database using Pyrebase. Now it's time to start using the `db` variable you created earlier to get and send data to the database.
 
 ## References and Resources
 

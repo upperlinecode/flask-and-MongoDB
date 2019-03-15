@@ -9,7 +9,7 @@ events = [{"event_name":"Guitar Recital", "event_date":"4/15/2019"},
     {"event_name":"Community Board Meeting", "event_date":"6/23/2019"}]
 
 config = {
-  "apiKey": os.environ['FIREBASE_APIKEY'],
+  "apiKey": os.environ['FIREBASE_API_KEY'],
   "authDomain": "community-event-manager.firebaseapp.com",
   "databaseURL": "https://community-event-manager.firebaseio.com",
   "projectId": "community-event-manager",
