@@ -1,10 +1,10 @@
-# Build a Community Board with Flask and Firebase
+# Build a Community Board with Flask and Firebase (with a little help from Pyrebase)
 
 I've been scouring the web for good resources on connecting a Flask application to Firebase, and I'm telling you, it's slim pickings. In this post (or series of posts, if this gets too long), I'm going to show you how to build out a fully functioning CRUD application using Firebase. You could do this much more easily using Django or a more robust framework, but what's the fun in that? I love the fact that Flask is such a lightweight framework and that it's so open and flexible.
 
 The project we're going to be building out is an **community event event board**- a place where users (who are logged in) can post events for their neighbors. Think of it as the digital version one of those coffee shop bulletin boards where folks can see what is happening in their neighborhood.
 
-Note: We're assuming some knowledge of Flask already since we're not starting from scratch. You should be able to create a basic app using routes, jinja2 templates, forms, and static files. If this sounds like gibberish, first go study these at_____________(fill this in).
+Note: We're assuming some knowledge of Flask already since we're not starting from scratch. You should be able to create a basic app using routes, jinja2 templates, forms, and static files.
 
 ## Part 1: Flask Starter Code
 
@@ -45,7 +45,7 @@ Take a look at what currently exists. We'll start at our controller: the `routes
 
   Take some time to follow the flow of the code here.
 
-## Part 2: Working with Firebase
+## Part 2: Firebase Setup
 
 ### Database Setup
 
@@ -73,14 +73,114 @@ Once the database is created, make sure you switch the dropdown from "cloud fire
 
 ### Installing Pyrebase
 
-We're going to use a Python wrapper for the Firebase API called Pyrebase. Let's add it to our project by running:
+We're going to use a Python wrapper for the Firebase API called [Pyrebase](https://github.com/thisbejim/Pyrebase). Let's add it to our project by running:
 
 ```bash
 pip install pyrebase
 ```
 In our routes.py file, add `import pyrebase` to the import section at the top of the page.
 
+### Connecting to your Firebase DB
+
+To connect to your firebase database, you'll need to set up a dictionary variable with your configuration data in your `routes.py` file. The `authDomain`, `databaseURL`, `projectId`, and `storageBucket` should all use the name you gave your firebase project during setup.
+
+```python
+config = {
+  "apiKey": os.environ['FIREBASE_API_KEY'],
+  "authDomain": "community-event-manager.firebaseapp.com",
+  "databaseURL": "https://community-event-manager.firebaseio.com",
+  "projectId": "community-event-manager",
+  "storageBucket": "community-event-manager.appspot.com",
+  "serviceAccount": "app/firebase-private-key.json",
+  "messagingSenderId": "1052538486567"
+}
+```
+
+** Important: Do not expose your API Key or the JSON file with your private key! Put your API key in an environment variable in your `.env` file - and make sure not to upload that file to github (it is ignored by default in this repository)! **
+
+This is what your .env file (in the root directory of your project) should look like:
+
+```
+LC_ALL=C.UTF-8
+LANG=C.UTF-8
+FIREBASE_API_KEY=AIzaSyCn1qXoa7sdfe7vgyce9E71SbcBa3s
+```
+
+You'll also want to go to your settings -> Service Accounts and then generate a new private key. That will download a JSON file that you can connect to your config variables. In the example below, we renamed the JSON file `firebase-private-key.json` and we also added that file to the `.gitignore` so that it doesn't get tracked by git and uploaded to github.
+
+Back to the routes.py file - once you've set up your config variable correctly, add the following code underneath:
+
+```Python
+firebase = pyrebase.initialize_app(config)
+db = firebase.database()
+```
+This code connects to our project using our configuration data, and then creates a `db` variable to interact with the Firebase database that we created earlier.
+
+## Part 3: Using Firebase
+
+You've hooked up your local application to your Firebase database using Pyrebase. Now it's time to start using the `db` variable you created earlier to get and send data to the database.
+
+### Sending data to Firebase
+
+Let's go back and take a look at what happens when the "New Event" form is posted to our controller.
+
+```python
+def new_event():
+    if request.method == "GET":
+        return render_template('new_event.html')
+    else:
+        new_event = dict(request.form)
+        events.append(new_event)
+        return redirect('/')
+```
+
+We currently append the `new_event` variable (that comes from the form) to the `events` list that we created earlier on. Unfortunately that events list will not persist (save) our data, so we're going to replace this with a call to our firebase `db` variable:
+
+```python
+def new_event():
+    if request.method == "GET":
+        return render_template('new_event.html')
+    else:
+        new_event = dict(request.form)
+        db.child("events").push(new_event) #replaces appending to events variable with firebase db call.
+        return redirect('/')
+```
+To test if this worked (you won't see anything change on the index page since we haven't updated it yet), head to the Firebase Console and open up your project, clicking on the 'database' section. You should see that the event you submitted is now a "node" in your database, under the node "events" (which was created as well since this was your first upload to that node - future submissions to `db.child("events")` will just add on to that node).
+
+<img src="screenshots/db-push.png" width="400">
+
+Try submitting a few more events to see what this looks like in the Firebase console.
+
+### Retrieving data from Firebase
+
+Now let's turn to pulling in our Firebase content, rather than sending new information to the database. We are currently doing this in the routing for our `/index` page by accessing the `events` list and sending it through to the template for rendering:
+
+```python
+def index():
+    return render_template('index.html', events = events)
+```
+
+Go ahead and delete the events variable defined at the top of the page - you're not going to need that anymore since you're moving to Firebase. Next, inside of our `index()` method we'll create a new variabe called `db_events` that pulls in the data we want from Firebase (the "events" node), and we'll pass that in to our template for rendering:
+
+```python
+def index():
+    db_events = db.child("events").get().val().values()
+    return render_template('index.html', events = db_events)
+```
+Now reload your app and you should hopefully see data getting pulled in from your Firebase database!
+
+### Practice
+You're not going to get good at Flask and Firebase unless you get a lot of practice. Here are a few things you can try doing to solidify this knowledge:
+
+- Add a 'locations' form on a new page where users can upload different locations events might take place. Save these to a new node in your firebase db.
+- Add another field to your events form and then make sure that that content gets rendered correctly on your index page
+- Build a similar app to inventory anything else you're interested in: animals, groceries, todo items, etc.
+
 ## References and Resources
+
+- [Firebase](https://firebase.google.com)
+- [Pyrebase Github Repo](https://github.com/thisbejim/Pyrebase)
+- [Heating up With Firebase: Tutorial on how to Integrate Firebase into your App](https://blog.devcolor.org/heating-up-with-firebase-tutorial-on-how-to-integrate-firebase-into-your-app-6ce97440175d)
 
 ## Setup:
 
