@@ -10,7 +10,7 @@ Note: We're assuming some knowledge of Flask already since we're not starting fr
 
 ### Initial setup
 
-We're going to start by downloading and opening a template that will get us going without too much setup.
+We're going to start by downloading and opening a template that will get us going without too much setup. Feel free to skip this if you don't want to follow along.
 
 ```bash
 git clone https://github.com/upperlinecode/using-firebase-and-flask
