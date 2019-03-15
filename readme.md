@@ -1,10 +1,10 @@
-# Build a Community Board with Flask and Firebase
+# Build a Community Board with Flask and Firebase (with a little help from Pyrebase)
 
 I've been scouring the web for good resources on connecting a Flask application to Firebase, and I'm telling you, it's slim pickings. In this post (or series of posts, if this gets too long), I'm going to show you how to build out a fully functioning CRUD application using Firebase. You could do this much more easily using Django or a more robust framework, but what's the fun in that? I love the fact that Flask is such a lightweight framework and that it's so open and flexible.
 
 The project we're going to be building out is an **community event event board**- a place where users (who are logged in) can post events for their neighbors. Think of it as the digital version one of those coffee shop bulletin boards where folks can see what is happening in their neighborhood.
 
-Note: We're assuming some knowledge of Flask already since we're not starting from scratch. You should be able to create a basic app using routes, jinja2 templates, forms, and static files. If this sounds like gibberish, first go study these at_____________(fill this in).
+Note: We're assuming some knowledge of Flask already since we're not starting from scratch. You should be able to create a basic app using routes, jinja2 templates, forms, and static files.
 
 ## Part 1: Flask Starter Code
 
@@ -169,7 +169,18 @@ def index():
 ```
 Now reload your app and you should hopefully see data getting pulled in from your Firebase database!
 
+### Practice
+You're not going to get good at Flask and Firebase unless you get a lot of practice. Here are a few things you can try doing to solidify this knowledge:
+
+- Add a 'locations' form on a new page where users can upload different locations events might take place. Save these to a new node in your firebase db.
+- Add another field to your events form and then make sure that that content gets rendered correctly on your index page
+- Build a similar app to inventory anything else you're interested in: animals, groceries, todo items, etc.
+
 ## References and Resources
+
+- [Firebase](https://firebase.google.com)
+- [Pyrebase Github Repo](https://github.com/thisbejim/Pyrebase)
+- [Heating up With Firebase: Tutorial on how to Integrate Firebase into your App](https://blog.devcolor.org/heating-up-with-firebase-tutorial-on-how-to-integrate-firebase-into-your-app-6ce97440175d)
 
 ## Setup:
 
