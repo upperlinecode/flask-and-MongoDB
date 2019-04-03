@@ -21,6 +21,7 @@ def new_event():
     if request.method == "GET":
         return render_template('new_event.html')
     else:
-        new_event = dict(request.form)
+        # new_event = dict(request.form.to_dict())
+        new_event = request.form.to_dict()
         events.append(new_event)
         return redirect('/')
