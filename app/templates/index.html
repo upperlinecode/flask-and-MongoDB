@@ -10,7 +10,7 @@
       <div class="event-list">
         <ul>
           {% for event in events %}
-            <li>{{ event.event_name }} - {{ event.event_date }}</li>
+            <li>{{ event.event_name.title() }} - {{ event.event_date }}</li>
           {% endfor %}
         </ul>
         <a href="/events/new">Submit an Event</a>
