@@ -10,11 +10,26 @@
       <div class="event-list">
         <ul>
           {% for event in events %}
-            <li>{{ event.event_name.title() }} - {{ event.event_date }}</li>
+            <li>{{ event.event.title() }} - {{ event.date }} {% if event.user %}(Posted by {{ event.user }}){% endif %} </li>
           {% endfor %}
         </ul>
         <a href="/events/new">Submit an Event</a>
       </div>
-
+      
+      {% if message %}
+        <p>{{ message }}</p>
+      {% else %}
+        <h2>Log in</h2>
+        <div>
+          <form action="/login" method="POST">
+            <label for="name">Name</label>
+            <input type="text" name="username">
+            <label for="password">Password</label>
+            <input type="password" name="password">
+            <input type="submit" value="Log In">
+          </form>
+          <p>No account? <a href="/signup">Sign up.</a></p>
+        </div>
+      {% endif %}
     </body>
 </html>
