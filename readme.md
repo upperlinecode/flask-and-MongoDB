@@ -10,7 +10,6 @@ pip install bcrypt # for password handling
 pip install bson # for page/post
 pip install datetime # for prettifying dates
 pip install python-dotenv # for .env variables
-pip install 
 ```
 
 
