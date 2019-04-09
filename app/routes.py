@@ -34,7 +34,7 @@ def index():
 # in Terminal: pip install dnspython (for +srv)
 # in Terminal: pip install bcrypt (for password handling)
 # Click on cluster name > Collections > Create Database (give database a name, give first collection a name - can be a dummy name)
-# Create a user: From Overview, "Add New User" (can autogenerate a password, save the password somewhere: AtIHE3q3O8HKWBOc)
+# Create a user: From Overview, "Add New User" (can autogenerate a password, save the password somewhere)
 
 from flask_pymongo import PyMongo
 
