@@ -1,8 +1,16 @@
 import os
 from app import app
 from flask import render_template, request, redirect, url_for, session # added url_for, session
-
 import bcrypt # added for password encryption
+from bson.objectid import ObjectId # added for page/post
+from datetime import datetime # added for date formatting
+from dotenv import load_dotenv # added for environment variables
+
+# load environment variables in .env
+load_dotenv()
+# store environment variables
+USER = os.getenv("MONGO_USERNAME")
+PASSWORD = os.getenv("MONGO_PASSWORD")
 
 # set some random secret key for session
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
@@ -31,7 +39,7 @@ def index():
 from flask_pymongo import PyMongo
 
 app.config['MONGO_DBNAME'] = 'test-mongo' # name of database
-app.config['MONGO_URI'] = 'mongodb+srv://admin:AtIHE3q3O8HKWBOc@jeffreylancaster-kxrbn.mongodb.net/test-mongo?retryWrites=true' # Command Line Tools, Connect Instructions, Secure Database (Whitelist IP), connection method (Connect Your Application) > Copy > replace password w/ password
+app.config['MONGO_URI'] = 'mongodb+srv://'+USER+':'+PASSWORD+'@jeffreylancaster-kxrbn.mongodb.net/test-mongo?retryWrites=true' # Command Line Tools, Connect Instructions, Secure Database (Whitelist IP), connection method (Connect Your Application) > Copy > replace password w/ password
 # same for node.js > 3.0 and Python > 3.6
 
 mongo = PyMongo(app)
@@ -49,6 +57,25 @@ mongo = PyMongo(app)
 
 # Check collection for new user(s)
 
+# NEW EVENT
+
+@app.route('/events/new', methods=['GET', 'POST'])
+
+def new_event():
+    if request.method == "GET":
+        return render_template('new_event.html')
+    else:
+        user_name = request.form['user_name']
+        event_name = request.form['event_name']
+        event_date = request.form['event_date']
+
+        # reformat date
+        dateObj = datetime.strptime(event_date, '%Y-%m-%d')
+        dateStr = dateObj.strftime('%a, %b %d, %Y')
+
+        events = mongo.db.events
+        events.insert({'event': event_name, 'date': event_date, 'user': user_name, 'dateStr': dateStr})
+        return redirect('/')
 
 # NEW USER SIGN UP
 
@@ -71,7 +98,6 @@ def signup():
 
 # can clear session cookie
 
-
 # EXISTING USER LOGIN
 
 @app.route('/login', methods=['POST'])
@@ -87,19 +113,32 @@ def login():
 
     return 'Invalid username/password combination'
 
+# USER LOGOUT
 
-# NEW EVENT
+@app.route('/logout')
 
-@app.route('/events/new', methods=['GET', 'POST'])
+def logout():
+    session.clear()
+    return redirect('/')
 
-def new_event():
-    if request.method == "GET":
-        return render_template('new_event.html')
-    else:
-        user_name = request.form['user_name']
-        event_name = request.form['event_name']
-        event_date = request.form['event_date']
-        
-        events = mongo.db.events
-        events.insert({'event': event_name, 'date': event_date, 'user': user_name})
-        return redirect('/')
+# USER'S EVENTS (GATED PAGE)
+
+@app.route('/events/myevents')
+
+def myevents():
+    collection = mongo.db.events
+    username = session['username']
+    events = collection.find({'user' : username})
+
+    return render_template('my_events.html', events = events)
+
+# EVENT PAGE (INDIVIDUAL POST)
+
+@app.route('/events/<eventID>')
+
+def event(eventID):
+    collection = mongo.db.events
+    event = collection.find_one({'_id' : ObjectId(eventID)})
+
+    return render_template('event.html', event = event)
+    

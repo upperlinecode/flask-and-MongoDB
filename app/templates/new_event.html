@@ -13,6 +13,9 @@
           <input type="name" name="user_name" value="{% if session['username'] %}{{session['username']}}{% endif %}" placeholder="Your name" {% if session['username'] %}readonly{% endif %}>
           <input type="submit" value="Submit">
         </form>
-        <a href="/">Back to the Board</a>
+        <p><a href="/">Back to the Board</a></p>
+        {% if session %}
+        <p><a href="/logout">Log out</a></p>
+        {% endif %}
     </body>
 </html>

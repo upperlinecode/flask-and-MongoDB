@@ -10,14 +10,15 @@
       <div class="event-list">
         <ul>
           {% for event in events %}
-            <li>{{ event.event.title() }} - {{ event.date }} {% if event.user %}(Posted by {{ event.user }}){% endif %} </li>
+            <li><a href="/events/{{event._id}}">{{ event.event.title() }} - {{ event.dateStr }}</a> {% if event.user %}(Posted by {{ event.user }}){% endif %} </li>
           {% endfor %}
         </ul>
         <a href="/events/new">Submit an Event</a>
       </div>
       
       {% if message %}
-        <p>{{ message }}</p>
+        <p><a href="/events/myevents">My Events</a></p>
+        <p>{{ message }} <a href="/logout">Log out</a></p>
       {% else %}
         <h2>Log in</h2>
         <div>
