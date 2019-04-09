@@ -12,7 +12,6 @@ pip install datetime # for prettifying dates
 pip install python-dotenv # for .env variables
 ```
 
-
 or all in one:
 
 ```python
