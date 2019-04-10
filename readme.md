@@ -65,6 +65,47 @@ Read on for the steps and lessons to build that completed Flask + MongoDB app.
 
 ### Individual Post Pages
 
+Now that we have individual posts stored in our MongoDB database with unique identifiers, `_id`s, we can consider how to show a unique page for each. Adding a new route for each new post would be massively inefficient, so instead, we'll make use of variables in the route name and definition.
+
+Before we write a new route, we'll want to make sure we've installed the `bson` module:
+
+```bash
+pip install bson
+```
+
+The `bson` module will help us convert `ObjectID`s into usable strings we can more-easily work with in our database. We'll need to add an import statement in our app, as well:
+
+```python
+from bson.objectid import ObjectId
+```
+
+Next we'll write a new route that includes the `<eventID>` variable as part of the route name itself. We'll then pass that same `eventID` variable to the `event()` function.
+
+In the `event()` function:
+
+- We first define the collection in the MongoDB we plan to use.
+- Then we'll filter the collection to retrieve only the event that has an `_id` that matches the `eventID` variable.
+- This event is then passed to the `event.html` template to be rendered for the user.
+
+```python
+@app.route('/events/<eventID>')
+
+def event(eventID):
+    collection = mongo.db.events
+    event = collection.find_one({'_id' : ObjectId(eventID)})
+
+    return render_template('event.html', event = event)
+```
+
+And an HTML snippet to show the filtered data:
+
+```html
+<div class="header">
+    <h1>{{event.event.title()}} ({{event.date}})</h1>
+    <h3>Posted by {{event.user}}</h3>
+</div>
+```
+
 ### User Accounts & Sessions
 
 A common feature of many apps is that they allow the creation of user accounts. To do this, a few things need to happen:
@@ -84,13 +125,19 @@ from flask import render_template, request, redirect, session, url_for
 
 > Note, we're also adding the `url_for` function which will be used to simplify how a user is passed from one page to another.
 
-We can assign a value to a property of the `session` variable in order to store that value:
+To be able to use the `session` functionality, we need to store a secret key that will be used to sign each session. The `secret_key` will be a property of the app itself:
+
+```python
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+```
+
+Now that a session can be created, we can assign a value to a property of the `session` variable in order to store that value:
 
 ```python
 session['username'] = "My Name"
 ```
 
-To access that variable, we can call the `session` variable and that property name:
+To access that variable, we can call the `session` variable and the property name:
 
 ```python
 print(session['username'])
