@@ -2,11 +2,11 @@
 
 1. Intro
 2. Initial Setup
-  a. [Connect to MongoDB](#connect-to-mongo)
-  b. [Push to MongoDB](#push-to-mongo)
-  c. [Queries of MongoDB](#queries-of-mongodb)
-  d. [Sorting Results](#sorting-results)
-  e. [Push to Heroku](#push-to-heroku)
+    a. [Connect to MongoDB](#connect-to-mongo)
+    b. [Push to MongoDB](#push-to-mongo)
+    c. [Queries of MongoDB](#queries-of-mongodb)
+    d. [Sorting Results](#sorting-results)
+    e. [Push to Heroku](#push-to-heroku)
 3. Extensions
     a. [Individual Post Pages](#individual-post-pages)
     a. [User Accounts](#user-accounts)
