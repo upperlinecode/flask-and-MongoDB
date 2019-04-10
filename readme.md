@@ -100,9 +100,9 @@ def event(eventID):
 And an HTML snippet to show the filtered data:
 
 ```html
-<div class="header">
-    <h1>{{event.event}} ({{event.date}})</h1>
-    <h3>Posted by {{event.user}}</h3>
+<div>
+    <h1>{{ event.event }} ({{ event.date }})</h1>
+    <h3>Posted by {{ event.user }}</h3>
 </div>
 ```
 
