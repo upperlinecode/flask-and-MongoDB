@@ -3,6 +3,7 @@ from app import app
 from flask import render_template, request, redirect, url_for, session # added url_for, session
 import bcrypt # added for password encryption
 from bson.objectid import ObjectId # added for page/post
+from datetime import datetime # added for date formatting
 from dotenv import load_dotenv # added for environment variables
 
 # load environment variables in .env
@@ -68,8 +69,12 @@ def new_event():
         event_name = request.form['event_name']
         event_date = request.form['event_date']
 
+        # reformat date
+        dateObj = datetime.strptime(event_date, '%Y-%m-%d')
+        dateStr = dateObj.strftime('%a, %b %d, %Y')
+
         events = mongo.db.events
-        events.insert({'event': event_name, 'date': event_date, 'user': user_name})
+        events.insert({'event': event_name, 'date': event_date, 'user': user_name, 'dateStr': dateStr})
         return redirect('/')
 
 
@@ -140,3 +145,4 @@ def myevents():
     events = collection.find({'user' : username})
 
     return render_template('my_events.html', events = events)
+
