@@ -65,15 +65,180 @@ Read on for the steps and lessons to build that completed Flask + MongoDB app.
 
 ### Individual Post Pages
 
-### User Accounts
+### User Accounts & Sessions
+
+A common feature of many apps is that they allow the creation of user accounts. To do this, a few things need to happen:
+
+- [New User Sign Up](#new-user-sign-up)
+- [Logging In](#logging-in)
+- [Logging Out](#logging-out)
+- [Gated Pages](#gated-pages)
+
+Before we address each of these actions, it's worth nothing *how* the app will know whether a user is logged in. To keep track of whether a user is logged in, we'll use the `session` variable that is part of any browser. The `session` variable is stored in the browser memory, and we can access it using a function built into Flask: `session`.
+
+To bring in the `session` function from Flask, we'll update the import statement in our app. 
+
+```python
+from flask import render_template, request, redirect, session, url_for
+```
+
+> Note, we're also adding the `url_for` function which will be used to simplify how a user is passed from one page to another.
+
+We can assign a value to a property of the `session` variable in order to store that value:
+
+```python
+session['username'] = "My Name"
+```
+
+To access that variable, we can call the `session` variable and that property name:
+
+```python
+print(session['username'])
+# My Name
+```
+
+We can also write logic statements to capture whether the `session` variable contains a particular property:
+
+```python
+if 'username' in session:
+	# some code here
+```
 
 ### New User Sign Up
 
+In order for a new user to sign up, a few things need to happen:
+
+1. We need to show the user the `signup.html` template (via a `GET` request).
+2. Once they've filled out the form on that template, we need to check the database to see if we can find that user (via a `POST` request and `.find_one()`.
+3. If we can find that user, then they already exist, so a new user cannot sign up with the same name.
+4. If we cannot find that user, then that user does not yet exist, so we can create it.
+5. To create the new user in the database, we can `.insert()` the `username` and `password` we get from the form.
+6. We then start a new session with the `username` from the form.
+7. Lastly, we redirect the user to the homepage.
+
+```python
+@app.route('/signup', methods=['POST', 'GET'])
+
+def signup():
+    if request.method == 'POST':
+        users = mongo.db.users
+        existing_user = users.find_one({'name' : request.form['username']})
+
+        if existing_user is None:
+            users.insert({'name' : request.form['username'], 'password' : request.form['password']})
+            session['username'] = request.form['username']
+            return redirect(url_for('index'))
+
+        return 'That username already exists! Try logging in.'
+
+    return render_template('signup.html')
+```
+
+And here's an HTML snippet that corresponds to the route above:
+
+```html
+<form action="/signup" method="POST">
+    <label for="name">Name</label>
+    <input type="text" name="username">
+    <label for="password">Password</label>
+    <input type="password" name="password">
+    <input type="submit" value="Sign Up">
+</form>
+```
+
+> Since we don't (yet) have a way for a user to log out, you can clear the session cookie using your browser's Developer Tools.
+
+- Consider where you might want to show the user they are logged in.
+- Consider what else a user would expect to see when signing up.
+- Also consider what a user should do if they already have an account? (see below) 
+
 ### Logging In
+
+Now that a user has signed up, they'll need a way to sign back in in the future. To account for this, we may want a new `login` route.
+
+This route should consult the MongoDB and find the user who is trying to log in. It will then compare the password submitted by the user to the password stored in the database. If the passwords are the same, a new session will be started for the user and the user will be routed to the index page. Otherwise, they will receive a message indicating an invalid username/password combination.
+
+```python
+@app.route('/login', methods=['POST'])
+
+def login():
+    users = mongo.db.users
+    login_user = users.find_one({'name' : request.form['username']})
+
+    if login_user:
+        if request.form['password'] == login_user['password']:
+            session['username'] = request.form['username']
+            return redirect(url_for('index'))
+
+    return 'Invalid username/password combination'
+```
+
+And here's an HTML snipped that corresponds to the route above. Notice how it include a link to the `signup` route in case a user doesn't yet have an account.
+
+```html
+<h2>Log in</h2>
+<div>
+  	<form action="/login" method="POST">
+        <label for="name">Name</label>
+        <input type="text" name="username">
+        <label for="password">Password</label>
+        <input type="password" name="password">
+        <input type="submit" value="Log In">
+  	</form>
+  	<p>No account? <a href="/signup">Sign up.</a></p>
+</div>
+```
+
+- Consider where you might want to include a form to "Log In"
+- Consider how you would only show the login form to a user who isn't logged in (e.g. doesn't yet have a session started).
 
 ### Logging Out
 
+Once a user is logged in, they may also want to log out. Logging out is as simple as clearing the stored session data and redirecting to another page.
+
+```python
+@app.route('/logout')
+
+def logout():
+    session.clear()
+    return redirect('/')
+```
+
+- Consider where in your HTML templates you may want to include a link to "Log Out".
+
 ### Gated Pages
+
+Sometimes you may have pages that you don't want everyone to be able to see, e.g profile/account information or a list of the events/items a user has submitted. Maybe you only want to show information when a user is logged in and it is that same user's information you want to show.
+
+Using what we already know, think about how to write a new route that shows a template populated by data from the database filtered by the name stored in `session['username']`. An example solution is shown below.
+
+We can add a new route:
+
+```python
+@app.route('/events/myevents')
+
+def myevents():
+    collection = mongo.db.events
+    username = session['username']
+    events = collection.find({'user' : username})
+
+    return render_template('my_events.html', events = events)
+```
+
+And also a new snippet for an HTML template:
+
+```html
+<div class="event-list">
+    <ul>
+      	{% for event in events %}
+        	<li><a href="/events/{{event._id}}">{{ event.event }} - {{ event.date }}</a>(Posted by {{ event.user }})</li>
+      	{% endfor %}
+    </ul>
+</div>
+```
+
+- Consider where in your HTML template(s) you might want to include a link to "My Events"
+- Think about how you might only show the "My Events" link to a user who is logged in.
 
 ## Reach Extensions
 
