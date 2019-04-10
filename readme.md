@@ -133,6 +133,58 @@ print(dateStr)
 
 ### Environment Variables
 
+Environment variables are used to protect sensitive usernames and passwords. By hiding credentials, it is much more difficult for anyone to gain unauthorized access to sensitive data.
+
+Credentials are listed in a file called `.env`, and that file is then named in a repository's `.gitignore` file. By including `.env` in the `.gitignore`, the `.env` file will not be uploaded and shared to github. Instead, we will be able to use the credentials when we develop in our local environment, and when we push to the cloud we'll need to make sure to securely store the credentials in the platform itself.
+
+To use environment variables, we first need to install the `python-dotenv` module (and the `os` module) using the Terminal:
+
+```bash
+pip install os # if you haven't already
+pip install python-dotenv
+```
+
+And we need to include the `load_dotenv` function in our app:
+
+```python
+import os # if you haven't already
+from dotenv import load_dotenv
+```
+
+Next, we create a new file called `.env` and list the credentials we want to store there:
+
+```
+MONGO_USERNAME="admin"
+MONGO_PASSWORD="password"
+```
+
+Back in our app, the `load_dotenv` function loads the variables from the `.env` file so we can use variable names in place of the credentials themselves.
+
+```python
+# first load environment variables in .env
+load_dotenv()
+
+# then store environment variables with new names
+USER = os.getenv("MONGO_USERNAME")
+PASS = os.getenv("MONGO_PASSWORD")
+```
+
+Now whenever we want to use the credentials, we can just use the name of the variable instead of the credential itself.
+
+This code before:
+
+```python
+app.config['MONGO_URI'] = 'mongodb+srv://admin:password@server-kxrbn.mongodb.net/test?retryWrites=true'
+```
+
+becomes this using environment variables:
+
+```python
+app.config['MONGO_URI'] = 'mongodb+srv://'+USER+':'+PASS+'@server-kxrbn.mongodb.net/test?retryWrites=true'
+```
+
+So if someone were to see our code (on github or using other tools), they wouldn't be able to see our username and password.
+
 #### Environment Variables in Goorm
 
 #### Environment Variables in Heroku
