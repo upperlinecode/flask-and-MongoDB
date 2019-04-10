@@ -2,22 +2,22 @@
 
 1. Intro
 2. Initial Setup
-	a. [Connect to MongoDB](#connect-to-mongo)
-	b. [Push to MongoDB](#push-to-mongo)
-	c. [Queries of MongoDB](#queries-of-mongodb)
-	d. [Sorting Results](#sorting-results)
-	e. [Push to Heroku](#push-to-heroku)
+    a. [Connect to MongoDB](#connect-to-mongo)
+    b. [Push to MongoDB](#push-to-mongo)
+    c. [Queries of MongoDB](#queries-of-mongodb)
+    d. [Sorting Results](#sorting-results)
+    e. [Push to Heroku](#push-to-heroku)
 3. Extensions
-	a. [Individual Post Pages](#individual-post-pages)
-	a. [User Accounts](#user-accounts)
-	a. [New User Sign Up](#new-user-sign-up)
-	a. [Logging In](#logging-in)
-	a. [Logging Out](#logging-out)
-	a. [Gated Pages](#gated-pages)
+    a. [Individual Post Pages](#individual-post-pages)
+    a. [User Accounts](#user-accounts)
+    a. [New User Sign Up](#new-user-sign-up)
+    a. [Logging In](#logging-in)
+    a. [Logging Out](#logging-out)
+    a. [Gated Pages](#gated-pages)
 4. Reach Extensions
-	a. [Date Formatting](#date-formatting)
-	a. [Environment Variables](#environment-variables)
-	a. [Password Hashing](#password-hashing)
+    a. [Date Formatting](#date-formatting)
+    a. [Environment Variables](#environment-variables)
+    a. [Password Hashing](#password-hashing)
 
 ## Intro
 
