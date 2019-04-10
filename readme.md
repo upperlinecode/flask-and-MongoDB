@@ -79,9 +79,9 @@ Read on for the steps and lessons to build that completed Flask + MongoDB app.
 
 Now that you have a sense of the basics, there are loads of directions you and students may want to take the framework you've built so far. Here, we touch on three possible reach extensions:
 
-- Formatting Dates
-- Environment Variables
-- Password Hashing
+- [Date Formatting](#date-formatting)
+- [Environment Variables](#environment-variables)
+- [Password Hashing](#password-hashing)
 
 ### Date Formatting
 
