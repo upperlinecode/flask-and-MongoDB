@@ -171,13 +171,13 @@ PASS = os.getenv("MONGO_PASSWORD")
 
 Now whenever we want to use the credentials, we can just use the name of the variable instead of the credential itself.
 
-This code before:
+Recall the code we use to connect to our MongoDB:
 
 ```python
 app.config['MONGO_URI'] = 'mongodb+srv://admin:password@server-kxrbn.mongodb.net/test?retryWrites=true'
 ```
 
-becomes this using environment variables:
+Using environment variables, it is now secured:
 
 ```python
 app.config['MONGO_URI'] = 'mongodb+srv://'+USER+':'+PASS+'@server-kxrbn.mongodb.net/test?retryWrites=true'
@@ -199,7 +199,7 @@ For your deployed app to function on heroku, you'll need to access...
 
 #### Resources
 
-- [`python-dotenv` on GitHub](https://github.com/theskumar/python-dotenv)
+- [python-dotenv on GitHub](https://github.com/theskumar/python-dotenv)
 
 ### Password Hashing
 
