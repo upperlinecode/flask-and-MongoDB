@@ -65,15 +65,15 @@ Read on for the steps and lessons to build that completed Flask + MongoDB app.
 
 ### Individual Post Pages
 
-Now that we have individual posts stored in our MongoDB database with unique identifiers, `_id`s, we can consider how to show a unique page for each. Adding a new route for each new post would be massively inefficient, so instead, we'll make use of variables in the route name and definition.
+Now that we have individual posts stored in our MongoDB database with unique identifiers, `_id`'s, we can consider how to show a unique page for each. Adding a new route for each new post would be massively inefficient, so instead, we'll make use of variables in the route name and definition.
 
-Before we write a new route, we'll want to make sure we've installed the `bson` module:
+Before we write a new route, we'll want to make sure we've installed the `bson` module. The `bson` module will help us convert `ObjectId`s into usable strings we can more-easily work with in our database.
 
 ```bash
 pip install bson
 ```
 
-The `bson` module will help us convert `ObjectID`s into usable strings we can more-easily work with in our database. We'll need to add an import statement in our app, as well:
+We'll need to add an import statement in our app, as well:
 
 ```python
 from bson.objectid import ObjectId
@@ -101,7 +101,7 @@ And an HTML snippet to show the filtered data:
 
 ```html
 <div class="header">
-    <h1>{{event.event.title()}} ({{event.date}})</h1>
+    <h1>{{event.event}} ({{event.date}})</h1>
     <h3>Posted by {{event.user}}</h3>
 </div>
 ```
