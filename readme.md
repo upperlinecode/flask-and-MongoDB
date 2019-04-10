@@ -103,12 +103,14 @@ There are two functions you may find useful for reformatting dates: `strptime` a
 
 `strptime` is short for "string parse time" and takes a string as an argument and returns a DateTime Object. It does this according to a format that you define by using variables that represent different parts of a date/time: e.g. `%d` is the day of the month as a zero-padded decimal number, and `%Y` is the year with century as a decimal number. The [documentation](https://docs.python.org/3.7/library/datetime.html#strftime-and-strptime-behavior) has the full list of options.
 
-So to convert the string `04-10-19` into a DateTime Object, we need to recognize that it's in the format of `MM-DD-YY` which would be represented as `%m-%d-%y`. Notice how the dashes as used in the representation just like they're used in the string. `strptime` takes the string and the representation as arguments to output the DateTime Object:
+So to convert the string `04-10-19` into a DateTime Object, we need to recognize that it's in the format of `MM-DD-YY` which would be represented as `%m-%d-%y`. Notice how the dashes as used in the representation just like they're used in the string. `strptime` takes the string and the representation as arguments to output a DateTime Object:
 
 ```python
-date = 04-10-19
-DateObj = datetime.strptime(date, '%m-%d-%y')
+date = "04-10-19"
+dateObj = datetime.strptime(date, '%m-%d-%y')
 ```
+
+#### `strftime`
 
 To represent the DateTime Object in a new way, we can use `strftime` which stands for "string format time". It takes a single argument: the new DateTime format:
 
