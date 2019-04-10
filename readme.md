@@ -122,7 +122,7 @@ print(dateStr)
 
 > `%a` is the weekday as locale’s abbreviated name (Sun, Mon, etc.); `%b` is the month as locale’s abbreviated name (Jan, Feb, etc.); `%d` is the day of the month as a zero-padded decimal number (01, 02, etc.); and `%Y` is the year with century as a decimal number (2000, 2001, etc.).
 
-#### Extension
+#### Extensions
 
 - `datetime` also includes support for parsing and formatting times, timezones, and various localization/languages.
 - Try using `datetime` to display 24-hour time (e.g. 18:00) instead of 12-hour time (e.g. 6:00pm).
@@ -187,8 +187,86 @@ So if someone were to see our code (on github or using other tools), they wouldn
 
 #### Environment Variables in Goorm
 
+When you are building in Goorm, ...
+
 #### Environment Variables in Heroku
+
+When you deploy your app to heroku, you are not deploying the `.env` file. Instead, heroku has it's own secure storage location for listing environment variables.
+
+For your deployed app to function on heroku, you'll need to access...
+
+#### Extensions
+
+#### Resources
+
+- [`python-dotenv` on GitHub](https://github.com/theskumar/python-dotenv)
 
 ### Password Hashing
 
+So far, we've asked users to come up with a username and a password, however we're storing that password in plaintext in our database. Storing passwords in plaintext is **highly insecure** because if someone who isn't authorized gains access to the database, they would have access to all users' passwords.
+
+To store passwords more securely, we can hash the password, and store that value instead. Then when a user tries to log into the app, we'll compare the hash of the password they provide to the hash of the password that is stored in the database. If they two match, we grant access; if they don't, then we deny access.
+
+> The benefit of using a hash is that it cannot (practically) be unhashed. Unlike encryption/decryption, the hash is a one-way function, so even if someone gets a hash, they cannot work backwards to figure out the original password input.
+
+To hash passwords, we'll use the `bcrypt` module:
+
+```bash
+pip install bcrypt
+```
+
+And we need to import `bcrypt` into our app:
+
+```python
+import bcrypt
+```
+
+We can now modify the `signup` route to generate and store the hash of the password provided by the user:
+
+```python
+@app.route('/signup', methods=['POST', 'GET'])
+
+def signup():
+    if request.method == 'POST':
+        users = mongo.db.users
+        existing_user = users.find_one({'name' : request.form['username']})
+
+        if existing_user is None:
+            hashpass = bcrypt.hashpw(request.form['password'].encode('utf-8'), bcrypt.gensalt())
+            users.insert({'name' : request.form['username'], 'password' : str(hashpass, 'utf-8')})
+            session['username'] = request.form['username']
+            return redirect(url_for('index'))
+
+        return 'That username already exists! Try logging in.'
+
+    return render_template('signup.html')
+```
+
+And we can modify the `login` route to check that the hash of the password provided matches the stored password hash for a given user:
+
+```python
+@app.route('/login', methods=['POST'])
+
+def login():
+    users = mongo.db.users
+    login_user = users.find_one({'name' : request.form['username']})
+
+    if login_user:
+        if bcrypt.hashpw((request.form['password']).encode('utf-8'), login_user['password'].encode('utf-8')) == login_user['password'].encode('utf-8'):
+            session['username'] = request.form['username']
+            return redirect(url_for('index'))
+
+    return 'Invalid username/password combination'
+```
+
+Sign up with a new user to see how `bcrypt.hashpw()` generates and stores a hashed password instead of the plaintext password.
+
+#### Extensions
+
+- Explore other hashing algorithms, e.g. SHA-256
+- Explore how "salts" are used to complicate stored password hashes
+
+#### Resources
+
+- [The bcrypt Project](https://pypi.org/project/bcrypt/)
 
