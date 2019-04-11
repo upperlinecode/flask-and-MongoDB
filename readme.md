@@ -1,5 +1,4 @@
 # Build a Community Board with Flask and MongoDB (with a little help from PyMongo)
-
 1. Intro
 2. Initial Setup
     a. [Connect to MongoDB](#connect-to-mongo)
