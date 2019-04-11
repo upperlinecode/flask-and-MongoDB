@@ -1,11 +1,12 @@
 # Build a Community Board with Flask and MongoDB (with a little help from PyMongo)
 1. Intro
 2. Initial Setup
-    a. [Connect to MongoDB](#connect-to-mongo)
-    b. [Push to MongoDB](#push-to-mongo)
-    c. [Queries of MongoDB](#queries-of-mongodb)
-    d. [Sorting Results](#sorting-results)
-    e. [Push to Heroku](#push-to-heroku)
+    1. [Connect to MongoDB](#connect-to-mongo)
+    1. [Push to MongoDB](#push-to-mongo)
+    1. [Queries of MongoDB](#queries-of-mongodb)
+    1. [Sorting Results](#sorting-results)
+    1. [Push to Heroku](#push-to-heroku)
+
 3. Extensions
     a. [Individual Post Pages](#individual-post-pages)
     a. [User Accounts](#user-accounts)
