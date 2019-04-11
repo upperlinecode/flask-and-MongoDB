@@ -1,23 +1,23 @@
 # Build a Community Board with Flask and MongoDB (with a little help from PyMongo)
+
 1. Intro
 2. Initial Setup
     1. [Connect to MongoDB](#connect-to-mongo)
-    1. [Push to MongoDB](#push-to-mongo)
-    1. [Queries of MongoDB](#queries-of-mongodb)
-    1. [Sorting Results](#sorting-results)
-    1. [Push to Heroku](#push-to-heroku)
-
+    2. [Push to MongoDB](#push-to-mongo)
+    3. [Queries of MongoDB](#queries-of-mongodb)
+    4. [Sorting Results](#sorting-results)
+    5. [Push to Heroku](#push-to-heroku)
 3. Extensions
-    a. [Individual Post Pages](#individual-post-pages)
-    a. [User Accounts](#user-accounts)
-    a. [New User Sign Up](#new-user-sign-up)
-    a. [Logging In](#logging-in)
-    a. [Logging Out](#logging-out)
-    a. [Gated Pages](#gated-pages)
+    1. [Individual Post Pages](#individual-post-pages)
+    2. [User Accounts](#user-accounts)
+    3. [New User Sign Up](#new-user-sign-up)
+    4. [Logging In](#logging-in)
+    5. [Logging Out](#logging-out)
+    6. [Gated Pages](#gated-pages)
 4. Reach Extensions
-    a. [Date Formatting](#date-formatting)
-    a. [Environment Variables](#environment-variables)
-    a. [Password Hashing](#password-hashing)
+    1. [Date Formatting](#date-formatting)
+    2. [Environment Variables](#environment-variables)
+    3. [Password Hashing](#password-hashing)
 
 ## Intro
 
