@@ -323,7 +323,7 @@ user = users.find_one({'name' : 'My Name'})
 
 The `.find_one({})` query method is particularly useful when searching a collection in which documents are assigned unique id's.
 
-### Sorting and Limiting Results
+### Sorting and Limiting Query Results
 
 In addition to finding documents that match a particular query, you may also want to sort the results and/or limit the search to the first n-many results. PyMongo has two methods to help us do just that.
 
