@@ -50,7 +50,7 @@ Read on for the steps and lessons to build that completed Flask + MongoDB app.
 To get started using MongoDB as a database, you'll want to sign up for an Atlas account at [mongodb.com](https://www.mongodb.com/). The sign up process is a bit lengthy, but it involves:
 
 - Signing up with a (valid) email address
-> If you're demoing this sign-up for students and you have a gmail account, consider using `yourname+mongo@gmail.com` (or some variant) to sign up as a new user.
+  - > If you're demoing this sign-up for students and you have a gmail account, consider using `yourname+mongo@gmail.com` (or some variant) to sign up as a new user.
 - Submitting your name and creating a password
 - When asked to create your first cluster, you can either follow the prompts, or close the dialog box.
 - If you close the dialog, you'll be presented with options for the "Cloud Provider" and "Region".
