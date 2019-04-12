@@ -2,10 +2,10 @@
 
 1. Intro
 2. Initial Setup
-    1. [Connect to MongoDB](#connect-to-mongo)
-    2. [Push Data to MongoDB](#push-data-to-mongo)
+    1. [Connect to MongoDB](#connect-to-mongodb)
+    2. [Push Data to MongoDB](#push-data-to-mongodb)
     3. [Queries of MongoDB](#queries-of-mongodb)
-    4. [Sorting and Limiting Results](#sorting-and-limiting-results)
+    4. [Sorting and Limiting Query Results](#sorting-and-limiting-query-results)
     5. [Push to Heroku](#push-to-heroku)
 3. Extensions
     1. [Individual Post Pages](#individual-post-pages)
