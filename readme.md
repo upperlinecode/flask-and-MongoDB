@@ -434,14 +434,14 @@ And here's an HTML snippet that corresponds to the route above. Notice how it in
 ```html
 <h2>Log in</h2>
 <div>
-  <form action="/login" method="POST">
-    <label for="name">Name</label>
-    <input type="text" name="username">
-    <label for="password">Password</label>
-    <input type="password" name="password">
-    <input type="submit" value="Log In">
-  </form>
-  <p>No account? <a href="/signup">Sign up.</a></p>
+    <form action="/login" method="POST">
+        <label for="name">Name</label>
+        <input type="text" name="username">
+        <label for="password">Password</label>
+        <input type="password" name="password">
+        <input type="submit" value="Log In">
+    </form>
+    <p>No account? <a href="/signup">Sign up.</a></p>
 </div>
 ```
 
@@ -485,11 +485,11 @@ And also a new snippet for an HTML template:
 
 ```html
 <div class="event-list">
-  <ul>
-  	{% for event in events %}
-    	<li><a href="/events/{{event._id}}">{{ event.event }} - {{ event.date }}</a>(Posted by {{ event.user }})</li>
-  	{% endfor %}
-  </ul>
+    <ul>
+        {% for event in events %}
+            <li><a href="/events/{{event._id}}">{{ event.event }} - {{ event.date }}</a>(Posted by {{ event.user }})</li>
+        {% endfor %}
+    </ul>
 </div>
 ```
 
