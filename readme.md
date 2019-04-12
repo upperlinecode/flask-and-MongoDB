@@ -51,10 +51,10 @@ IS THIS SOMETHING WE WANT TO INCLUDE? STRUCTURED VS. UNSTRUCTURED, ETC.?
 
 ## Initial Setup
 
-To get started using MongoDB as a database, you'll want to sign up for an Atlas account at [mongodb.com](https://www.mongodb.com/). The sign up process is a bit lengthy, but it involves:
+To get started using MongoDB as a database, you'll want to sign up for an Atlas (free) account at [mongodb.com](https://www.mongodb.com/). The sign up process is a bit lengthy, but it involves:
 
 - Signing up with a (valid) email address
-  > If you're demoing this sign-up for students and you have a gmail account, consider using `yourname+mongo@gmail.com` (or some variant) to sign up as a new user.
+  > If you're demoing this sign-up for students and you have a gmail account you've already used to sign up, consider using `yourname+mongo@gmail.com` (or some variant) to sign up as a new user.
 - Submitting your name and creating a password
 - When asked to create your first cluster, you can either follow the prompts, or close the dialog box.
 - If you close the dialog, you'll be presented with options for the "Cloud Provider" and "Region".
@@ -305,7 +305,23 @@ And an HTML snippet for that route:
 
 > We use the handlebar-percent syntax to execute a `for` loop over all of the entries in the `events` array. This will result in creating all of the `<li>`'s within the `<ul>`, one for each entry in `events`.
 
-[Will update] If instead you wanted to find... `.find({'event' : 'TV Show Premiere'}) - would do multiples. But if only one, then .find_one({'event' : 'TV Show Premiere'})
+But what if instead of all documents, you only wanted to find the ones that match some criteria? The method you should use will depend on whether or not the result of the query is unique.
+
+If the query may return multiple documents, you can use the `.find({})` method with search criteria to match against, e.g.:
+
+```python
+events = collection.find({'event' : 'Submit Homework'})
+```
+
+This would find *all* events for which the `event` property is `'Submit Homework` and return an iterable object.
+
+But what if you know there's only one such entry, for example when searching a list of users for only one particular user (since users must be unique). Instead of using the `.find({})` query method, we can use the `.find_one({})` query method:
+
+```python
+user = users.find({'name' : 'My Name'})
+```
+
+The `.find_one({})` query method is particularly useful when documents are assigned unique id's.
 
 ### Sorting and Limiting Results
 
