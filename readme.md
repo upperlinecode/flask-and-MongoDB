@@ -235,7 +235,7 @@ We've now seen how to write data to MongoDB, but we also want to read (and displ
 PyMongo and Flask-PyMongo have a number of useful built-in query methods:
 
 - `.find({})` - will find multiple entries that match the criteria in the `{}`. Returns all documents that match the criteria.
-- `.find_one({}) - will find a single entry that matches the criteria in the `{}`. Returns a single document.
+- `.find_one({})` - will find a single entry that matches the criteria in the `{}`. Returns a single document.
 - `.find_one_and_delete({})` - will find and delete one document that matches the criteria in the `{}`.
 - `.find_one_and_replace({}, {})` - will find one document that matches the criteria in the first `{}` and replace it with the second `{}`.
 
