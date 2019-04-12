@@ -129,7 +129,7 @@ We've already installed the module, but we needed to import it to our app:
 from flask_pymongo import PyMongo
 ```
 
-To connect to our MongoDB, we need to specify two configuration parameters: 'MONGO_DBNAME' and 'MONGO_URI'. This is done by assigning values to the `app.config` variable:
+To connect to our MongoDB, we need to specify two configuration parameters: 'MONGO_DBNAME' and 'MONGO_URI'. This is done by assigning values to two new `app.config` properties:
 
 ```python
 # name of database
@@ -155,7 +155,7 @@ app.config['MONGO_DBNAME'] = 'test'
 app.config['MONGO_URI'] = 'mongodb+srv://admin:Ypzb8UvmWKXJsubU@cluster0-kxrbn.mongodb.net/test?retryWrites=true'
 ```
 
-> It's worth noting that the default URI in the "Connect Your Application" dialog box is for node.js (> 3.0), and it is exactly the same as the driver for Python (> 3.6). If a student misses switching the driver, it won't actually matter.
+> It's worth noting that the default URI in the "Connect Your Application" dialog box is for node.js (3.0 or later), and it is exactly the same as the driver for Python (3.6 or later). If a student misses switching the driver, it won't actually matter.
 
 > It's also worth noting that the second module we installed, `dnspython`, is necessary to account for the `+srv` in the 'MONGO_URI'.
 
