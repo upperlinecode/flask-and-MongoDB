@@ -61,7 +61,12 @@ To get started using MongoDB as a database, you'll want to sign up for an Atlas 
 - Finally, tap the green "Create Cluster" button.
   > It will take 7-10 minutes to create the cluster, so it's best to create the MongoDB account before taking a break.
 
-While the cluster is being created in the cloud, you can begin the installation of the modules necessary to use MongoDB with Flask: a Python toolkit to connect to MongoDB built especially for Flask (`flask-pymongo`) and a DNS toolkit for Python (`dnspython`). In the Terminal:
+While the cluster is being created in the cloud, you can begin the installation of the modules necessary to use MongoDB with Flask:
+
+- a Python toolkit to connect to MongoDB built especially for Flask (`flask-pymongo`), and
+- a DNS toolkit for Python (`dnspython`).
+
+In the Terminal:
 
 ```bash
 pip install flask-pymongo
