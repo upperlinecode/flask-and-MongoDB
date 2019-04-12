@@ -230,6 +230,40 @@ By now you should also be familiar with the `request` function in Flask. Here it
 
 ### Queries of MongoDB
 
+We've now seen how to write data to MongoDB, but we also want to read (and display) data from MongoDB. To do this, we will need to query, or request particular data from, MongoDB.
+
+PyMongo and Flask-PyMongo have a number of useful built-in query methods:
+- `.find({})` - will find multiple entries that match the criteria in the `{}`. Returns an array of matching objects.
+- `.find_one({}) - will find a single entry that matches the criteria in the `{}`. Returns an object.
+- `.find_one_and_delete({})` - will find and delete one entry that matches the criteria in the `{}`.
+- `.find_one_and_replace({}, {})` - will find one entry that matches the criteria in the first `{}` and replace it with the second `{}`.
+
+> Read about additional query methods in the [PyMongo API Documentation](http://api.mongodb.com/python/current/api/pymongo/collection.html)
+
+To see querying in action, we'll start with the most general search of all. Using the `.find({})` method with empty `{}` will return all items in the database.
+
+```python
+@app.route('/events')
+
+def events():
+    collection = mongo.db.events
+    events = collection.find({})
+
+    return render_template('events.html', events = events)
+```
+
+And an HTML snippet for that route:
+
+```html
+<div class="event-list">
+    <ul>
+        {% for event in events %}
+            <li><a href="/events/{{event._id}}">{{ event.event.title() }} - {{ event.dateStr }}</a> {% if event.user %}(Posted by {{ event.user }}){% endif %} </li>
+        {% endfor %}
+    </ul>
+</div>
+```
+
 ### Sorting Results
 
 ### Push to Heroku
@@ -395,19 +429,19 @@ def login():
     return 'Invalid username/password combination'
 ```
 
-And here's an HTML snipped that corresponds to the route above. Notice how it include a link to the `signup` route in case a user doesn't yet have an account.
+And here's an HTML snippet that corresponds to the route above. Notice how it include a link to the `signup` route in case a user doesn't yet have an account.
 
 ```html
 <h2>Log in</h2>
 <div>
-  	<form action="/login" method="POST">
-        <label for="name">Name</label>
-        <input type="text" name="username">
-        <label for="password">Password</label>
-        <input type="password" name="password">
-        <input type="submit" value="Log In">
-  	</form>
-  	<p>No account? <a href="/signup">Sign up.</a></p>
+  <form action="/login" method="POST">
+    <label for="name">Name</label>
+    <input type="text" name="username">
+    <label for="password">Password</label>
+    <input type="password" name="password">
+    <input type="submit" value="Log In">
+  </form>
+  <p>No account? <a href="/signup">Sign up.</a></p>
 </div>
 ```
 
@@ -451,11 +485,11 @@ And also a new snippet for an HTML template:
 
 ```html
 <div class="event-list">
-    <ul>
-      	{% for event in events %}
-        	<li><a href="/events/{{event._id}}">{{ event.event }} - {{ event.date }}</a>(Posted by {{ event.user }})</li>
-      	{% endfor %}
-    </ul>
+  <ul>
+  	{% for event in events %}
+    	<li><a href="/events/{{event._id}}">{{ event.event }} - {{ event.date }}</a>(Posted by {{ event.user }})</li>
+  	{% endfor %}
+  </ul>
 </div>
 ```
 
