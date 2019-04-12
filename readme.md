@@ -47,9 +47,119 @@ Read on for the steps and lessons to build that completed Flask + MongoDB app.
 
 ## Initial Setup
 
+To get started using MongoDB as a database, you'll want to sign up for an Atlas account at [mongodb.com](https://www.mongodb.com/). The sign up process is a bit lengthy, but it involves:
 
+- Signing up with a (valid) email address
+  - If you're demoing this sign-up for students and you have a gmail account, consider using `yourname+mongo@gmail.com` (or some variant) to sign up as a new user.
+- Submitting your name and creating a password
+- When asked to create your first cluster, you can either follow the prompts, or close the dialog box.
+- If you close the dialog, you'll be presented with options for the "Cloud Provider" and "Region".
+  - We suggest using AWS as the "Cloud Provider" and the region geographically closest to you.
+- Choose the "M0" cluster tier to keep things free.
+- No "Backup" is needed.
+- And you can give the cluster a name or use the default "Cluster0"
+- Finally, tap the green "Create Cluster" button.
+
+> It will take 7-10 minutes to create the cluster, so it's best to create the MongoDB account before taking a break.
+
+While the cluster is being created in the cloud, you can begin the installation of the modules necessary to use MongoDB with Flask: a Python toolkit to connect to MongoDB built especially for Flask (`flask-pymongo`) and a DNS toolkit for Python (`dnspython`). In the Terminal:
+
+```bash
+pip install flask-pymongo
+pip install dnspython
+```
+
+Once the cluster is created on MongoDB, we need to do three things to complete the database setup before we can connect to it from our app:
+
+- [Create a database](#create-a-database)
+- [Create a database user](#create-a-database-user)
+- [Whitelist IP addresses](#whitelist-ip-addresses)
+
+#### Create a database
+
+To create a database in the MongoDB interface, click on the name of the cluster, e.g. `Cluster0` and then on the "Collections" heading.
+
+> You'll notice a MongoDB "checklist" pop up as you get set up. It's worth calling out the user experience of building a new cluster/database/collection on MongoDB. Do students think it's good? bad? intuitive? confusing?
+
+In the "Collections" tab, you'll be prompted with a big green button to "Create Database" - tap that button.
+
+You'll then be prompted to give the database a name (it can be anything, e.g. `test`) and to create the first collection by giving it a name (it can also be anything, e.g. `events`). Later, we'll see that when adding data to a database, if you are sending data to a collection that doesn't (yet) exist, MongoDB will create that collection for you. So there's no need to stress about getting this perfect from the beginning.
+
+> You don't need to check "Capped Collection".
+
+We now have our first database! But before we can connect to it, we need to set up our first database user.
+
+#### Create a database user
+
+To create a database user, return to the Clusters overview by clicking on "Clusters" in the left sidebar. Once there, select the "Security" tab.
+
+Notice the green button in the top-right corner that says "+ Add New User" - go ahead and tap that.
+
+Choose a username, e.g. `admin` and (secure) password, e.g. `Ypzb8UvmWKXJsubU`, and make a note of the password you've selected.
+
+> We suggest tapping "Autogenerate Secure Password" to create a compliant password. Then tap "Show" and copy-and-paste the password somewhere safe.
+
+When creating a user, you can set various privileges for that user. For this app, we're just going to keep the default "Read and write to any database" permissions.
+
+Tap "Add User" to complete the creation of your first database user!
+
+#### Whitelist IP addresses
+
+Now we need to let MongoDB know the IP addresses from which it is safe to access our database and to which it is safe to send data from the database.
+
+Still on the "Security" tab, you'll now see the user you just created. Tap the "IP Whitelist" sub-tab to view a list of the safe IP addresses.
+
+Again, tap the green button in the top-right labeled "+ Add IP Address".
+
+We're presented with an option to just add the current IP address, to allow access from anywhere, or to list a particular IP address. Since most students will want their app to be accessed by anyone anywhere (and since they should not be storing particularly sensitive data), it's ok to tap the "Allow Access from Anywhere" button. Add a comment, e.g. "Global access", then tap "Confirm".
+
+> It may take a moment for the "Allow Access from Anywhere" setting to be implemented.
 
 ### Connect to MongoDB
+
+To facilitate connecting to MongoDB, we'll be using the module we installed called Flask-PyMongo. Flask-PyMongo is a set of Python tools for interacting with MongoDB that have been wrapped to integrate well with Flask.
+
+We've already installed the module, but we needed to import it to our app:
+
+```python
+from flask_pymongo import PyMongo
+```
+
+To connect to our MongoDB, we need to specify two configuration parameters: 'MONGO_DBNAME' and 'MONGO_URI'. This is done by assigning values to the `app.config` variable:
+
+```python
+# name of database
+app.config['MONGO_DBNAME'] = 'database-name' 
+
+# URI of database
+app.config['MONGO_URI'] = 'mongo-uri'
+```
+
+We should replace `database-name` with the name of the database we created in the MongoDB interface, e.g. `test`.
+
+To get our `mongo-uri`, we need to head back to the MongoDB interface. Click to the "Overview" tab, and tap the "Connect" button below the name of the cluster. Here we'll choose the middle option, "Connect Your Application". Because we're using Python 3.7, we want to select the "Python" driver and the version of "3.6 or later". That will populate the Connection String Only box with a URI that is (mostly) the `mongo-uri`.
+
+If you examine the URI closely, you'll notice that our user's username has been included in the URI, but the password is represented as `<password>`. Before we can connect to our database, we'll need to replace `<password>` with our password that we stored somewhere secure.
+
+Setting the configuration parameters should now look like:
+
+```python
+# name of database
+app.config['MONGO_DBNAME'] = 'test' 
+
+# URI of database
+app.config['MONGO_URI'] = 'mongodb+srv://admin:Ypzb8UvmWKXJsubU@cluster0-kxrbn.mongodb.net/test?retryWrites=true'
+```
+
+> It's worth noting that the default URI in the "Connect Your Application" dialog box is for node.js (> 3.0), and it is exactly the same as the driver for Python (> 3.6). If a student misses switching the driver, it won't actually matter.
+
+> It's also worth noting that the second module we installed, `dnspython`, is necessary to account for the `+srv` in the 'MONGO_URI'.
+
+The final part of setting up the connection between our app and our MongoDB is to create a new variable called `mongo` that will use PyMongo to connect our app to the database using the aforementioned configuration variables:
+
+```python
+mongo = PyMongo(app)
+```
 
 ### Push to MongoDB
 
