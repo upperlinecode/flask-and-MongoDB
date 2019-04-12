@@ -327,7 +327,7 @@ The `.find_one({})` query method is particularly useful when searching a collect
 
 In addition to finding documents that match a particular query, you may also want to sort the results and/or limit the search to the first n-many results. PyMongo has two methods to help us do just that.
 
-#### `.sort()`
+#### Sorting Query Results
 
 The `.sort()` method is used to rearrange the documents that are returned according to some criteria. For example, to sort the events from oldest to newest, we might sort by a `date` parameter and provide an indicator that we want the results in *ascending* order (`1`):
 
@@ -351,7 +351,7 @@ This query would find all events, then sort the results first by date (oldest to
 
 - Consider how a user would find it most useful to see the data and design a corresponding query. 
 
-#### `.limit()`
+#### Limiting Query Results
 
 The `.limit()` method is useful for larger datasets where you may only want to show a few results. This query would only show the first 10 documents in a collection:
 
