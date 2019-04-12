@@ -45,9 +45,9 @@ To view a finished app, rename `routes-complete.py` to `routes.py` and then exec
 
 Read on for the steps and lessons to build that completed Flask + MongoDB app.
 
-## Mini-Lesson: What is a Database?
+### Mini-Lesson: What is a Database?
 
-IS THIS SOMETHING WE WANT TO INCLUDE?
+IS THIS SOMETHING WE WANT TO INCLUDE? STRUCTURED VS. UNSTRUCTURED, ETC.?
 
 ## Initial Setup
 
@@ -120,6 +120,10 @@ Choose a username, e.g. `admin` and (secure) password, e.g. `Ypzb8UvmWKXJsubU`, 
 When creating a user, you can set various privileges for that user. For this app, we're just going to keep the default "Read and write to any database" permissions.
 
 Tap "Add User" to complete the creation of your first database user!
+
+### Mini-Lesson: What is an IP Address?
+
+IS THIS SOMETHING WE WANT TO INCLUDE? IPv4 vs. IPv7? ICANN? DNS? ETC.?
 
 #### Whitelist IP addresses
 
@@ -256,6 +260,10 @@ By now you should be familiar with the different between `GET` and `POST` reques
 
 By now you should also be familiar with the `request` function in Flask. Here it is used to store each of the user-submitted values to a variable. Next the MongoDB collection which is the target for the data is specified, `events`, and new data is added to the collection as a JSON object via the `.insert()` method we saw before. Lastly, the user is redirected to the homepage.
 
+### Mini-Lesson: What is a Query?
+
+IS THIS SOMETHING WE WANT TO INCLUDE?
+
 ### Queries of MongoDB
 
 We've now seen how to write data to MongoDB, but we also want to read (and display) data from MongoDB. To do this, we will need to query, or request particular data from, MongoDB.
@@ -353,6 +361,10 @@ And an HTML snippet to show the filtered data:
     <h3>Posted by {{ event.user }}</h3>
 </div>
 ```
+
+### Mini-Lesson: What is a Session? What is a Cookie?
+
+IS THIS SOMETHING WE WANT TO INCLUDE?
 
 ### User Accounts & Sessions
 
@@ -468,7 +480,7 @@ def login():
     return 'Invalid username/password combination'
 ```
 
-And here's an HTML snippet that corresponds to the route above. Notice how it include a link to the `signup` route in case a user doesn't yet have an account.
+And here's an HTML snippet that corresponds to the route above. Notice how it includes a link to the `signup` route in case a user doesn't yet have an account.
 
 ```html
 <h2>Log in</h2>
@@ -543,6 +555,10 @@ Now that you have a sense of the basics, there are loads of directions you and s
 - [Environment Variables](#environment-variables)
 - [Password Hashing](#password-hashing)
 
+### Mini-Lesson: What is a Date? What is a Time?
+
+IS THIS SOMETHING WE WANT TO INCLUDE? HOW COMPUTERS KEEP TIME?
+
 ### Date Formatting
 
 Formatting dates in python is done using the `datetime` module. `datetime` is already built into Python 3, but you may want to ensure it's installed using:
@@ -590,6 +606,10 @@ print(dateStr)
 #### Resources
 
 - [Python 3.7 datetime Documentation](https://docs.python.org/3.7/library/datetime.html)
+
+### Mini-Lesson: What is an Environment Variable?
+
+IS THIS SOMETHING WE WANT TO INCLUDE?
 
 ### Environment Variables
 
@@ -660,6 +680,10 @@ For your deployed app to function on heroku, you'll need to access...
 #### Resources
 
 - [python-dotenv on GitHub](https://github.com/theskumar/python-dotenv)
+
+### Mini-Lesson: What is a Hash? How to Best Store Passwords?
+
+IS THIS SOMETHING WE WANT TO INCLUDE?
 
 ### Password Hashing
 
