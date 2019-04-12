@@ -268,6 +268,8 @@ And an HTML snippet for that route:
 
 > Here we use the handlebar-percent syntax to execute a `for` loop over all of the entries in the `events` array. This will result in creating all of the `<li>`'s within the `<ul>`, one for each entry in `events`.
 
+[Will update] If instead you wanted to find... `.find({'event' : 'TV Show Premiere'}) - would do multiples. But if only one, then .find_one({'event' : 'TV Show Premiere'})
+
 ### Sorting and Limiting Results
 
 - Add .sort([('count', 1)]).limit(10)
