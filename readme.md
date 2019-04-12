@@ -165,7 +165,64 @@ The final part of setting up the connection between our app and our MongoDB is t
 mongo = PyMongo(app)
 ```
 
+That may seem like a lot of work to get things set up, but a bit of setup will make our lives a lot easier down the line when we're reading data from and writing data to MongoDB.
+
 ### Push to MongoDB
+
+To find out whether our app is correctly configured to connect to our MongoDB, we can add a new route to our app that will just write data to our database:
+
+```python
+@app.route('/add')
+
+def add():
+    user = mongo.db.users
+    user.insert({'name':'Your Name'})
+    return 'Added User!'
+```
+
+In the `add()` function, we first indicate which collection we want to write data to. In this case, we've selected the `users` collection. What's that? We don't yet have a `users` collection? MongoDB is smart enough to recognize that if we're writing data to a collection that doesn't yet exist, it will first create that new collection then add the data to it.
+
+We next use the `.insert()` method to add a simple JSON object to the database. Here we're only specifying one property, `'name'`, with the value `'Your Name'`. Try replacing `'Your Name'` with your name or other names.
+
+Lastly, the function will return the text "Added User!" on the page.
+
+With Flask running, once you've added this new route and successfully gotten a page that says "Added User!", head back to your MongoDB interface, navigate to yoru "Collections" (using the "Collections" button on the "Overview"), and notice that you have a new collection called `users`. Clicking on that collection should show a new entry with the name you submitted!
+
+Using the backend to write data to a database is not very user-friendly. Instead, we'd ideally use a form to collect the user's data and then store that data to the database. Let's do this by adding a new route and a new HTML template:
+
+```python
+@app.route('/events/new', methods=['GET', 'POST'])
+
+def new_event():
+    if request.method == "GET":
+        return render_template('new_event.html')
+    else:
+        event_name = request.form['event_name']
+        event_date = request.form['event_date']
+        user_name = request.form['user_name']
+
+        events = mongo.db.events
+        events.insert({'event': event_name, 'date': event_date, 'user': user_name})
+        return redirect('/')
+```
+
+And the corresponding HTML snippet:
+
+```html
+<form method="post" action="/events/new">
+    <label for="event_name">Event Name:</label>
+    <input type="text" name="event_name" value="">
+    <label for="event_date">Date:</label>
+    <input type="date" name="event_date" value="">
+    <label for="name">Name:</label>
+    <input type="name" name="user_name" value="">
+    <input type="submit" value="Submit">
+</form>
+```
+
+By now you should be familiar with the different between `GET` and `POST` requests. This route shows the user the `new_event.html` template if the page is accessed via a `GET` request. If, however, the route is accessed via a `POST` request, it will collect the data from the form and store it to the database.
+
+By now you should also be familiar with the `request` function in Flask. Here it is used to store each of the user-submitted values to a variable. Next the MongoDB collection which is the target for the data is specified, `events`, and new data is added to the collection as a JSON object via the `.insert()` method we saw before. Lastly, the user is redirected to the homepage.
 
 ### Queries of MongoDB
 

@@ -11,7 +11,17 @@ app.config['MONGO_URI'] = 'mongo-uri'
 
 mongo = PyMongo(app)
 
-# CONNECT TO DB
+
+# INDEX
+
+@app.route('/')
+@app.route('/index')
+
+def index():
+    return "A Community Events Board"
+
+
+# CONNECT TO DB, ADD DATA
 
 @app.route('/add')
 
@@ -20,9 +30,8 @@ def add():
     user.insert({'name':'Your Name'})
     return 'Added User!'
 
-# Check collection for new user(s)
 
-# NEW EVENT
+# ADD NEW EVENT VIA FORM
 
 @app.route('/events/new', methods=['GET', 'POST'])
 
@@ -38,15 +47,15 @@ def new_event():
         events.insert({'event': event_name, 'date': event_date, 'user': user_name})
         return redirect('/')
 
-# INDEX ROUTE
 
-@app.route('/')
-@app.route('/index')
+# SHOW ALL EVENTS IN DATABASE
 
-def index():
+@app.route('/events')
+
+def events():
     collection = mongo.db.events
     events = collection.find({})
 
-    return render_template('index.html', events = events)
+    return render_template('events.html', events = events)
 
 
