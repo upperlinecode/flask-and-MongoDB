@@ -54,12 +54,12 @@ To get started using MongoDB as a database, you'll want to sign up for an Atlas 
 - Submitting your name and creating a password
 - When asked to create your first cluster, you can either follow the prompts, or close the dialog box.
 - If you close the dialog, you'll be presented with options for the "Cloud Provider" and "Region".
-> We suggest using AWS as the "Cloud Provider" and the region geographically closest to you.
+  > We suggest using AWS as the "Cloud Provider" and the region geographically closest to you.
 - Choose the "M0" cluster tier to keep things free.
 - No "Backup" is needed.
 - And you can give the cluster a name or use the default "Cluster0"
 - Finally, tap the green "Create Cluster" button.
-> It will take 7-10 minutes to create the cluster, so it's best to create the MongoDB account before taking a break.
+  > It will take 7-10 minutes to create the cluster, so it's best to create the MongoDB account before taking a break.
 
 While the cluster is being created in the cloud, you can begin the installation of the modules necessary to use MongoDB with Flask: a Python toolkit to connect to MongoDB built especially for Flask (`flask-pymongo`) and a DNS toolkit for Python (`dnspython`). In the Terminal:
 
