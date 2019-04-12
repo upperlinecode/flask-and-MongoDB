@@ -5,7 +5,7 @@
     1. [Connect to MongoDB](#connect-to-mongo)
     2. [Push Data to MongoDB](#push-data-to-mongo)
     3. [Queries of MongoDB](#queries-of-mongodb)
-    4. [Sorting Results](#sorting-results)
+    4. [Sorting and Limiting Results](#sorting-and-limiting-results)
     5. [Push to Heroku](#push-to-heroku)
 3. Extensions
     1. [Individual Post Pages](#individual-post-pages)
@@ -252,19 +252,27 @@ def events():
     return render_template('events.html', events = events)
 ```
 
+Here again we first define the collection in our MongoDB we want to query. We then run the `.find({})` query on that collection and store the results in the `events` variable which is sent to the template in the `render_template()` function.
+
 And an HTML snippet for that route:
 
 ```html
-<div class="event-list">
+<div>
     <ul>
         {% for event in events %}
-            <li><a href="/events/{{event._id}}">{{ event.event.title() }} - {{ event.dateStr }}</a> {% if event.user %}(Posted by {{ event.user }}){% endif %} </li>
+            <li>{{ event.event }} - {{ event.date }}</li>
         {% endfor %}
     </ul>
 </div>
 ```
 
-### Sorting Results
+> Here we use the handlebar-percent syntax to execute a `for` loop over all of the entries in the `events` array. This will result in creating all of the `<li>`'s within the `<ul>`, one for each entry in `events`.
+
+### Sorting and Limiting Results
+
+- Add .sort([('count', 1)]).limit(10)
+
+> Also check out the [MongoDB Python Documentation for Iterating Over Query Results](http://api.mongodb.com/python/current/api/pymongo/cursor.html)
 
 ### Push to Heroku
 
@@ -484,7 +492,7 @@ def myevents():
 And also a new snippet for an HTML template:
 
 ```html
-<div class="event-list">
+<div>
     <ul>
         {% for event in events %}
             <li><a href="/events/{{event._id}}">{{ event.event }} - {{ event.date }}</a>(Posted by {{ event.user }})</li>
