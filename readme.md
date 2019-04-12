@@ -233,10 +233,11 @@ By now you should also be familiar with the `request` function in Flask. Here it
 We've now seen how to write data to MongoDB, but we also want to read (and display) data from MongoDB. To do this, we will need to query, or request particular data from, MongoDB.
 
 PyMongo and Flask-PyMongo have a number of useful built-in query methods:
-- `.find({})` - will find multiple entries that match the criteria in the `{}`. Returns an array of matching objects.
-- `.find_one({}) - will find a single entry that matches the criteria in the `{}`. Returns an object.
-- `.find_one_and_delete({})` - will find and delete one entry that matches the criteria in the `{}`.
-- `.find_one_and_replace({}, {})` - will find one entry that matches the criteria in the first `{}` and replace it with the second `{}`.
+
+- `.find({})` - will find multiple entries that match the criteria in the `{}`. Returns all documents that match the criteria.
+- `.find_one({}) - will find a single entry that matches the criteria in the `{}`. Returns a single document.
+- `.find_one_and_delete({})` - will find and delete one document that matches the criteria in the `{}`.
+- `.find_one_and_replace({}, {})` - will find one document that matches the criteria in the first `{}` and replace it with the second `{}`.
 
 > Read about additional query methods in the [PyMongo API Documentation](http://api.mongodb.com/python/current/api/pymongo/collection.html)
 
@@ -252,7 +253,7 @@ def events():
     return render_template('events.html', events = events)
 ```
 
-Here again we first define the collection in our MongoDB we want to query. We then run the `.find({})` query on that collection and store the results in the `events` variable which is sent to the template in the `render_template()` function.
+Again, we first define the collection in our MongoDB we want to query. We then run the `.find({})` query on that collection and store the results in the `events` variable which is sent to the template in the `render_template()` function.
 
 And an HTML snippet for that route:
 
@@ -266,7 +267,7 @@ And an HTML snippet for that route:
 </div>
 ```
 
-> Here we use the handlebar-percent syntax to execute a `for` loop over all of the entries in the `events` array. This will result in creating all of the `<li>`'s within the `<ul>`, one for each entry in `events`.
+> We use the handlebar-percent syntax to execute a `for` loop over all of the entries in the `events` array. This will result in creating all of the `<li>`'s within the `<ul>`, one for each entry in `events`.
 
 [Will update] If instead you wanted to find... `.find({'event' : 'TV Show Premiere'}) - would do multiples. But if only one, then .find_one({'event' : 'TV Show Premiere'})
 
