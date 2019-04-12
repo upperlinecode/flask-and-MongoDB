@@ -367,7 +367,7 @@ events = collection.find({}).limit(10)
 events = collection.find({}).sort('date', -1).limit(5) 
 ```
 
-> According to the [documentation](https://docs.mongodb.com/manual/reference/method/db.collection.find/#combine-cursor-methods), `.sort()` is always run before `.limit()` irrespective of their order.
+> According to the [documentation](https://docs.mongodb.com/manual/reference/method/db.collection.find/#combine-cursor-methods), `.sort()` is always run before `.limit()` irrespective of the order in which they are chained.
 > ```python
 > # These are equivalent
 > events = collection.find({}).sort('date', -1).limit(5)
