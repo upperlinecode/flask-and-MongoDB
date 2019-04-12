@@ -3,7 +3,7 @@
 1. Intro
 2. Initial Setup
     1. [Connect to MongoDB](#connect-to-mongo)
-    2. [Push to MongoDB](#push-to-mongo)
+    2. [Push Data to MongoDB](#push-data-to-mongo)
     3. [Queries of MongoDB](#queries-of-mongodb)
     4. [Sorting Results](#sorting-results)
     5. [Push to Heroku](#push-to-heroku)
@@ -167,7 +167,9 @@ mongo = PyMongo(app)
 
 That may seem like a lot of work to get things set up, but a bit of setup will make our lives a lot easier down the line when we're reading data from and writing data to MongoDB.
 
-### Push to MongoDB
+### Push Data to MongoDB
+
+#### Write Data Directly to MongoDB
 
 To find out whether our app is correctly configured to connect to our MongoDB, we can add a new route to our app that will just write data to our database:
 
@@ -186,7 +188,9 @@ We next use the `.insert()` method to add a simple JSON object to the database. 
 
 Lastly, the function will return the text "Added User!" on the page.
 
-With Flask running, once you've added this new route and successfully gotten a page that says "Added User!", head back to your MongoDB interface, navigate to yoru "Collections" (using the "Collections" button on the "Overview"), and notice that you have a new collection called `users`. Clicking on that collection should show a new entry with the name you submitted!
+With Flask running, once you've added this new route and successfully gotten a page that says "Added User!", head back to your MongoDB interface, navigate to your "Collections" (using the "Collections" button on the "Overview"), and notice that you have a new collection called `users`. Clicking on that collection should show a new entry with the name you submitted!
+
+#### Using a Form to Collect Data
 
 Using the backend to write data to a database is not very user-friendly. Instead, we'd ideally use a form to collect the user's data and then store that data to the database. Let's do this by adding a new route and a new HTML template:
 
