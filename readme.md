@@ -277,7 +277,7 @@ PyMongo and Flask-PyMongo have a number of useful built-in query methods:
 
 > Read about additional query methods in the [PyMongo API Documentation](http://api.mongodb.com/python/current/api/pymongo/collection.html)
 
-To see querying in action, we'll start with the most general search of all. Using the `.find({})` method with empty `{}` will return all items in the database.
+To see querying in action, we'll start with the most general search of all. Using the `.find({})` method with empty `{}` (or with no `{}` at all) will return all items in the database.
 
 ```python
 @app.route('/events')
@@ -318,14 +318,62 @@ This would find *all* events for which the `event` property is `'Submit Homework
 But what if you know there's only one such entry, for example when searching a list of users for only one particular user (since users must be unique). Instead of using the `.find({})` query method, we can use the `.find_one({})` query method:
 
 ```python
-user = users.find({'name' : 'My Name'})
+user = users.find_one({'name' : 'My Name'})
 ```
 
-The `.find_one({})` query method is particularly useful when documents are assigned unique id's.
+The `.find_one({})` query method is particularly useful when searching a collection in which documents are assigned unique id's.
 
 ### Sorting and Limiting Results
 
-- Add .sort([('count', 1)]).limit(10)
+In addition to finding documents that match a particular query, you may also want to sort the results and/or limit the search to the first n-many results. PyMongo has two methods to help us do just that.
+
+#### `.sort()`
+
+The `.sort()` method is used to rearrange the documents that are returned according to some criteria. For example, to sort the events from oldest to newest, we might sort by a `date` parameter and provide an indicator that we want the results in *ascending* order (`1`):
+
+```python
+events = collection.find({}).sort('date', 1) 
+```
+
+If we wanted the results in descending order from newest to oldest, we just switch the `1` to `-1`:
+
+```python
+events = collection.find({}).sort('date', -1) 
+```
+
+It is also possible to sort data by multiple fields, e.g.:
+
+```python
+events = collection.find({}).sort([('date', pymongo.ASCENDING), ('price', pymongo.DESCENDING)]) 
+```
+
+This query would find all events, then sort the results first by date (oldest to newest), then by price (highest to lowest).
+
+- Consider how a user would find it most useful to see the data and design a corresponding query. 
+
+#### `.limit()`
+
+The `.limit()` method is useful for larger datasets where you may only want to show a few results. This query would only show the first 10 documents in a collection:
+
+```python
+events = collection.find({}).limit(10) 
+```
+
+#### Complex Queries
+
+`.sort()` and `.limit()` can be chained together with `.find({})` to produce complex queries. This query would sort all entries in a collection by the `date` field (newest to oldest) and then include only the first 5:
+
+```python
+events = collection.find({}).sort('date', -1).limit(5) 
+```
+
+> According to the [documentation](https://docs.mongodb.com/manual/reference/method/db.collection.find/#combine-cursor-methods), `.sort()` is always run before `.limit()` irrespective of their order.
+
+> ```python
+# These are equivalent
+events = collection.find({}).sort('date', -1).limit(5)
+events = collection.find({}).limit(5).sort('date', -1)
+```
 
 > Also check out the [MongoDB Python Documentation for Iterating Over Query Results](http://api.mongodb.com/python/current/api/pymongo/cursor.html)
 
