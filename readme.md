@@ -93,7 +93,7 @@ In the "Collections" tab, you'll be prompted with a big green button to "Create 
 
 You'll then be prompted to give the database a name (it can be anything, e.g. `test`) and to create the first collection by giving it a name (it can also be anything, e.g. `events`). Later, we'll see that when adding data to a database, if you are sending data to a collection that doesn't (yet) exist, MongoDB will create that collection for you. So there's no need to stress about getting this perfect from the beginning.
 
-![Create Database in MongoDB Interface](screenshots/mongodb-5-create-db.png "Create Database in MongoDB Interface")
+![Create Database in MongoDB Interface](screenshots/mongodb-5-create-database.png "Create Database in MongoDB Interface")
 
 > You don't need to check "Capped Collection".
 
