@@ -45,9 +45,11 @@ To view a finished app, rename `routes-complete.py` to `routes.py` and then exec
 
 Read on for the steps and lessons to build that completed Flask + MongoDB app.
 
-## Initial Setup
+## Mini-Lesson: What is a Database?
 
-<h2 style="background-color: #FF0;">What is a Database?</h2>
+IS THIS SOMETHING WE WANT TO INCLUDE?
+
+## Initial Setup
 
 To get started using MongoDB as a database, you'll want to sign up for an Atlas account at [mongodb.com](https://www.mongodb.com/). The sign up process is a bit lengthy, but it involves:
 
