@@ -83,6 +83,8 @@ Once the cluster is created on MongoDB, we need to do three things to complete t
 
 To create a database in the MongoDB interface, click on the name of the cluster, e.g. `Cluster0` and then on the "Collections" heading.
 
+![Initial View in MongoDB Interface](screenshots/mongodb-1-initial.png "Initial View in MongoDB Interface")
+
 > You'll notice a MongoDB "checklist" pop up as you get set up. It's worth calling out the user experience of building a new cluster/database/collection on MongoDB. Do students think it's good? bad? intuitive? confusing?
 
 In the "Collections" tab, you'll be prompted with a big green button to "Create Database" - tap that button.
