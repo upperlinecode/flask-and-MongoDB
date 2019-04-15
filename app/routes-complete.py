@@ -26,7 +26,7 @@ def index():
     if 'username' in session:
         message = 'You are logged in as ' + session['username'] + '.'
 
-    return render_template('index.html', events = events, message = message)
+    return render_template('events.html', events = events, message = message)
 
 
 # Sign up for MongoDB Atlas Account
