@@ -308,7 +308,9 @@ PyMongo and Flask-PyMongo have a number of useful built-in query methods:
 
 > Read about additional query methods in the [PyMongo API Documentation](http://api.mongodb.com/python/current/api/pymongo/collection.html)
 
-To see querying in action, we'll start with the most general search of all. Using the `.find({})` method with empty `{}` (or with no `{}` at all) will return all items in the collection. Let's write a new route to view all of the entries stored in a collection: 
+To see querying in action, we'll start with the most general search of all. Using the `.find({})` method with empty `{}` (or with no `{}` at all) will return all items in the collection.
+
+Let's write a new route to view all of the entries stored in a collection: 
 
 ```python
 @app.route('/events')
@@ -352,7 +354,7 @@ But what if you know there's only one such entry, for example when searching a l
 user = users.find_one({'name' : 'My Name'})
 ```
 
-The `.find_one({})` query method is particularly useful when searching a collection in which documents are assigned unique id's.
+The `.find_one({})` query method returns just the object itself instead of returning something you would have to iterate (or loop) over. This method is particularly useful when searching a collection in which documents are assigned unique id's.
 
 ### Sorting and Limiting Query Results
 
@@ -380,7 +382,9 @@ events = collection.find({}).sort([('date', pymongo.ASCENDING), ('price', pymong
 
 This query would find all events, then sort the results first by date (oldest to newest), then by price (highest to lowest).
 
-- Consider how a user would find it most useful to see the data and design a corresponding query. 
+#### Extensions
+
+- Consider how a user would find it most useful to see the data represented, then design a corresponding query. 
 
 #### Limiting Query Results
 
@@ -400,7 +404,7 @@ events = collection.find({}).sort('date', -1).limit(5)
 
 > According to the [documentation](https://docs.mongodb.com/manual/reference/method/db.collection.find/#combine-cursor-methods), `.sort()` is always run before `.limit()` irrespective of the order in which they are chained.
 > ```python
-> # These are equivalent
+> # These produce equivalent results
 > events = collection.find({}).sort('date', -1).limit(5)
 > events = collection.find({}).limit(5).sort('date', -1)
 > ```
@@ -409,7 +413,7 @@ events = collection.find({}).sort('date', -1).limit(5)
 
 ### Push to Heroku
 
-- Test this from ide.goorm.io
+When your app is working in the cloud environment on [ide.cs50.io](https://ide.cs50.io), you can choose to deploy it to heroku as you've done before.
 
 ## Extensions
 
