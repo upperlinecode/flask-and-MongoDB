@@ -308,7 +308,7 @@ PyMongo and Flask-PyMongo have a number of useful built-in query methods:
 
 > Read about additional query methods in the [PyMongo API Documentation](http://api.mongodb.com/python/current/api/pymongo/collection.html)
 
-To see querying in action, we'll start with the most general search of all. Using the `.find({})` method with empty `{}` (or with no `{}` at all) will return all items in the database.
+To see querying in action, we'll start with the most general search of all. Using the `.find({})` method with empty `{}` (or with no `{}` at all) will return all items in the collection. Let's write a new route to view all of the entries stored in a collection: 
 
 ```python
 @app.route('/events')
