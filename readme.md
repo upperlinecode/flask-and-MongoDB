@@ -23,9 +23,11 @@
 
 Now that you and your students have built an app using Flask, you might have recognized a need to store and retrieve data. For this, we're going to use a database called MongoDB.
 
-If you're just looking to run the demo code, this is a list of the packages you'll want to make sure you've installed. If you're using your own development environment, these should work as written.
+### Show Me a Demo First
 
-> In ide.cs50.io, you may need to add a `--user` flag at the end of each `pip install`. 
+If you've come just looking to run the demo code, this is a list of the packages you'll want to make sure you've installed. If you're using your own development environment, these should work as written.
+
+> In [ide.cs50.io](https://ide.cs50.io), you may need to add a `--user` flag at the end of each `pip install`. 
 
 ```python
 pip install flask
@@ -43,7 +45,7 @@ Or all in one:
 pip install flask flask-pymongo dnspython bcrypt bson datetime python-dotenv
 ```
 
-And you'll need to export these variables:
+And you'll need to export these variables in the Terminal:
 
 ```bash
 export FLASK_APP=main.py
@@ -56,22 +58,24 @@ export LANG=C.UTF-8
 
 To view a finished app:
 
-- rename `routes-complete.py` to `routes.py` and then execute `flask run` in the Terminal as before. `routes.py` is a starter template for building up a Flask app using MongoDB.
 - create a `.env` file with these credentials:
 ```bash
 MONGO_USERNAME="admin"
 MONGO_PASSWORD="6zCs4vJtrzwkLBqL"
 ```
+- rename the `routes.py` starter template to anything else, and rename `routes-complete.py` to `routes.py`. Then execute `flask run` in the Terminal as before.
 
-`flask run` should spin up the completed app.
+> Test out how to "Submit an Event", "Sign Up", "Log In", view an event page, and "Log Out". Examine (the newly named) `routes.py` to see how each action is implemented.
+
+### How'd You Make That?
 
 Read on for the steps and lessons to build that completed Flask + MongoDB app.
+
+## Initial Setup
 
 > Although you may be tempted to dive into a mini-lesson about "What is a database?" because it's tempting to want to share every bit of background knowledge with students, our experience has taught us that students need to see **that** the app can work before they become interested in the nuances of **why** it works exactly as it does. So don't feel like you ought to spend much time on this concept your first time through.
 > 
 > We've also picked out a few other times in these lessons where you may be tempted to dive deep into a topic, but it may be better to reserve that enthusiasm.
-
-## Initial Setup
 
 To get started using MongoDB as a database, you'll want to sign up for an Atlas (free) account at [mongodb.com](https://www.mongodb.com/). The sign up process is a bit lengthy, but it involves:
 
