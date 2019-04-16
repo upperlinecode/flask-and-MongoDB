@@ -443,7 +443,7 @@ Next we'll write a new route that includes the `<eventID>` variable as part of t
 In the `event()` function:
 
 - We first define the collection in the MongoDB we plan to use.
-- Then we'll filter the collection to retrieve only the event that has an `_id` that matches the `eventID` variable.
+- Then we'll filter the collection to retrieve only the event that has an `_id` that matches the `eventID` variable. Since each `_id` is unique, we can use the `.find_one({})` method which will return a single entry from the collection (which doesn't require iteration).
 - This event is then passed to the `event.html` template to be rendered for the user.
 
 ```python
@@ -491,6 +491,8 @@ To be able to use the `session` functionality, we need to store a secret key tha
 ```python
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 ```
+
+> Read more about sessions and secret keys in the [Flask documentation](http://flask.pocoo.org/docs/1.0/quickstart/#sessions).
 
 Now that a session can be created, we can assign a value to a property of the `session` variable in order to store that value:
 
