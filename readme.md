@@ -1,20 +1,25 @@
 # Build a Community Board with Flask and MongoDB (with a little help from PyMongo)
 
-1. Intro
-2. Initial Setup
-    1. [Connect to MongoDB](#connect-to-mongodb)
-    2. [Push Data to MongoDB](#push-data-to-mongodb)
-    3. [Queries of MongoDB](#queries-of-mongodb)
-    4. [Sorting and Limiting Query Results](#sorting-and-limiting-query-results)
-    5. [Push to Heroku](#push-to-heroku)
-3. Extensions
+1. [Intro](#intro)
+    1. [Show Me a Demo First](#show-me-a-demo-first)
+    2. [How'd You Make That?](#howd-you-make-that)
+2. [Initial Setup](#initial-setup)
+    1. [Create a database](#create-a-database)
+    2. [Create a database user](#create-a-database-user)
+    3. [Whitelist IP addresses](#whitelist-ip-addresses)
+    4. [Connect to MongoDB](#connect-to-mongodb)
+    5. [Push Data to MongoDB](#push-data-to-mongodb)
+    6. [Queries of MongoDB](#queries-of-mongodb)
+    7. [Sorting and Limiting Query Results](#sorting-and-limiting-query-results)
+    8. [Push to Heroku](#push-to-heroku)
+3. [Extensions](#extensions)
     1. [Individual Post Pages](#individual-post-pages)
     2. [User Accounts](#user-accounts)
     3. [New User Sign Up](#new-user-sign-up)
     4. [Logging In](#logging-in)
     5. [Logging Out](#logging-out)
     6. [Gated Pages](#gated-pages)
-4. Reach Extensions
+4. [Reach Extensions](#reach-extensions)
     1. [Date Formatting](#date-formatting)
     2. [Environment Variables](#environment-variables)
     3. [Password Hashing](#password-hashing)
@@ -113,7 +118,7 @@ Once the cluster is created on MongoDB, we need to do three things to complete t
 - [Create a database user](#create-a-database-user)
 - [Whitelist IP addresses](#whitelist-ip-addresses)
 
-#### Create a database
+### Create a database
 
 To create a database in the MongoDB interface, click on the name of the cluster, e.g. `Cluster0` and then on the "Collections" heading (or just on the "Collections" button below the cluster name).
 
@@ -133,7 +138,7 @@ You'll then be prompted to give the database a name (it can be anything, e.g. `t
 
 We now have our first database! But before we can connect to it, we need to set up our first database user.
 
-#### Create a database user
+### Create a database user
 
 To create a database user, return to the Clusters overview by clicking on "Clusters" in the left sidebar. Once there, select the "Security" tab.
 
@@ -151,7 +156,7 @@ When creating a user, you can set various privileges for that user. For this app
 
 Tap "Add User" to complete the creation of your first database user!
 
-#### Whitelist IP addresses
+### Whitelist IP addresses
 
 > Resist the temptation to go too deep into "What is an IP Address?" your first time through.
 
@@ -847,8 +852,6 @@ heroku config:unset GITHUB_USERNAME
 ```
 
 > Review the [Heroku documentation for creating and storing vars](https://devcenter.heroku.com/articles/config-vars).
-
-#### Extensions
 
 #### Resources
 
