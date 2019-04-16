@@ -790,11 +790,62 @@ Create a `.env` file as you would any other file, and save it to the top-level f
 
 You'll also see other system files that start with `.` such as `.flaskenv` and `.gitignore`.
 
+> At this point, it's worth checking again that you've listed `.env` in your `.gitignore` file.
+
 #### Environment Variables in Heroku
 
-When you deploy your app to heroku, you are not deploying the `.env` file. Instead, heroku has it's own secure storage location for listing environment variables.
+When you deploy your app to heroku, you do not include the `.env` file. Instead, heroku has it's own secure storage location for listing environment variables.
 
-For your deployed app to function on heroku, you'll need to access...
+For your deployed app to function on Heroku, you can either set the environment variables from the Heroku Dashboard or using the Terminal.
+
+##### Heroku Dashboard
+
+After logging into Heroku, you should see the name of your deployed project. Click on that project name:
+
+![Initial View in Heroku Dashboard](screenshots/heroku-dashboard-1.png "Initial View in Heroku Dashboard")
+
+Then from the Dashboard, choose "Settings":
+
+![Settings View in Heroku Dashboard](screenshots/heroku-dashboard-3.png "Settings View in Heroku Dashboard")
+
+There, you'll see "Config Vars", and tapping "Reveal Config Vars" will provide an interface for adding each environment variable.
+
+![Config Vars in Heroku Dashboard](screenshots/heroku-dashboard-5.png "Config Vars in Heroku Dashboard")
+
+Once you finish, you can "Hide Config Vars".
+
+##### Heroku Command Line Interface
+
+You can view current config var values using:
+
+```bash
+heroku config
+# GITHUB_USERNAME: joesmith
+# OTHER_VAR:    production
+```
+
+Or view a specific config variable using:
+
+```bash
+heroku config:get GITHUB_USERNAME
+# joesmith
+```
+
+Set a config variable using:
+
+```bash
+heroku config:set GITHUB_USERNAME=joesmith
+# Adding config vars and restarting myapp... done, v12
+# GITHUB_USERNAME: joesmith
+```
+
+Remove a config variable using:
+````bash
+heroku config:unset GITHUB_USERNAME
+# Unsetting GITHUB_USERNAME and restarting myapp... done, v13
+```
+
+> Review the [Heroku documentation for creating and storing vars](https://devcenter.heroku.com/articles/config-vars).
 
 #### Extensions
 
