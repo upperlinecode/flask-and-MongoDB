@@ -564,7 +564,8 @@ def signup():
 
 - Consider where you might want to show the user they are logged in.
 - Consider what else a user would expect to see when signing up.
-- Also consider what a user should do if they already have an account? (see below) 
+- Also consider what a user should do if they already have an account? (see below)
+- Think about why we only store the `username` in the session. Why don't we also store the password? Is this the most secure way to store credentials?
 
 ### Logging In
 
@@ -625,6 +626,8 @@ def logout():
     return redirect('/')
 ```
 
+#### Extensions
+
 - Consider where in your HTML templates you may want to include a link to "Log Out".
 
 ### Gated Pages
@@ -657,6 +660,8 @@ And also a new snippet for an HTML template:
     </ul>
 </div>
 ```
+
+#### Extensions
 
 - Consider where in your HTML template(s) you might want to include a link to "My Events"
 - Think about how you might only show the "My Events" link to a user who is logged in.
