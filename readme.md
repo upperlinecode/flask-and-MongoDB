@@ -250,6 +250,8 @@ Lastly, the function will return the text "Added User!" on the page.
 
 With Flask running, once you've added this new route and successfully gotten a page that says "Added User!", head back to your MongoDB interface, navigate to your "Collections" (using the "Collections" button on the "Overview"), and notice that you have a new collection called `users`. Clicking on that collection should show a new entry with the name you submitted!
 
+Examine the new entries in your collection. What data did you choose to add, and what data did MongoDB add for you? (look for `_id`'s)
+
 #### Extensions
 
 - Try making the JSON object that is inserted into the collection more complex by adding additional properties (with additional values).
@@ -413,7 +415,9 @@ events = collection.find({}).sort('date', -1).limit(5)
 
 ### Push to Heroku
 
-When your app is working in the cloud environment on [ide.cs50.io](https://ide.cs50.io), you can choose to deploy it to heroku as you've done before.
+When your app is working in the cloud environment on [ide.cs50.io](https://ide.cs50.io), you can choose to deploy it to Heroku as you've done before.
+
+> Note: you may want to run `git remote -v` and confirm that **your** username is in the URL. If it isn't, review [this video](https://www.youtube.com/watch?v=Ych-U3_Pb4k&list=PLetu2kRAyoeCvogwvGGq94QgATwfj5viJ&index=11) and follow the steps to remove Upperline's `remote` and add your own.
 
 ## Extensions
 
