@@ -203,7 +203,7 @@ Because we're using Python 3.7, we want to select the "Python" driver and the ve
 
 ![Connect to Cluster in MongoDB Interface](screenshots/mongodb-13-connect-to-db.png "Connect to Cluster in MongoDB Interface")
 
-If you examine the URI closely, you'll notice that our user's username has been included in the URI, as has the database name we previously created. The password, however, is represented as `<password>`. Before we can connect to our database, we'll need to replace `<password>` with our password that we stored somewhere secure.
+If you examine the URI closely, you'll notice that our user's username has been included in the URI, as has the database name we previously created, `/test?`. The password, however, is represented as `<password>`. Before we can connect to our database, we'll need to replace `<password>` with our password that we stored somewhere secure.
 
 Setting the configuration parameters should now look like:
 
@@ -219,7 +219,7 @@ app.config['MONGO_URI'] = 'mongodb+srv://admin:Ypzb8UvmWKXJsubU@cluster0-kxrbn.m
 
 > It's also worth noting that the second module we installed, `dnspython`, is necessary to account for the `+srv` in the 'MONGO_URI'.
 
-The final part of setting up the connection between our app and our MongoDB is to create a new variable called `mongo` that will use PyMongo to connect our app to the database using the aforementioned configuration variables:
+The final part of setting up the connection between our app and our MongoDB is to create a new variable in `routes.py` called `mongo` that will use PyMongo to connect our app to the database using the aforementioned configuration variables:
 
 ```python
 mongo = PyMongo(app)
@@ -249,6 +249,11 @@ We next use the `.insert()` method to add a simple JSON object to the database. 
 Lastly, the function will return the text "Added User!" on the page.
 
 With Flask running, once you've added this new route and successfully gotten a page that says "Added User!", head back to your MongoDB interface, navigate to your "Collections" (using the "Collections" button on the "Overview"), and notice that you have a new collection called `users`. Clicking on that collection should show a new entry with the name you submitted!
+
+#### Extensions
+
+- Try making the JSON object that is inserted into the collection more complex by adding additional properties (with additional values).
+- Try writing to a different collection that does/doesn't exist yet.
 
 #### Using a Form to Collect Data
 
