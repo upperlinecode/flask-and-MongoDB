@@ -257,7 +257,21 @@ With Flask running, once you've added this new route and successfully gotten a p
 
 #### Using a Form to Collect Data
 
-Using the backend to write data to a database is not very user-friendly. Instead, we'd ideally use a form to collect the user's data and then store that data to the database. Let's do this by adding a new route and a new HTML template:
+Using the backend to write data to a database is not very user-friendly. Instead, we'd ideally use a form to collect the user's data and then store that data to the database. Let's do this by adding a new HTML template and a new route:
+
+```html
+<form method="post" action="/events/new">
+    <label for="event_name">Event Name:</label>
+    <input type="text" name="event_name" value="">
+    <label for="event_date">Date:</label>
+    <input type="date" name="event_date" value="">
+    <label for="name">Name:</label>
+    <input type="name" name="user_name" value="">
+    <input type="submit" value="Submit">
+</form>
+```
+
+And the corresponding route:
 
 ```python
 @app.route('/events/new', methods=['GET', 'POST'])
@@ -275,21 +289,7 @@ def new_event():
         return redirect('/')
 ```
 
-And the corresponding HTML snippet:
-
-```html
-<form method="post" action="/events/new">
-    <label for="event_name">Event Name:</label>
-    <input type="text" name="event_name" value="">
-    <label for="event_date">Date:</label>
-    <input type="date" name="event_date" value="">
-    <label for="name">Name:</label>
-    <input type="name" name="user_name" value="">
-    <input type="submit" value="Submit">
-</form>
-```
-
-By now you should be familiar with the different between `GET` and `POST` requests. This route shows the user the `new_event.html` template if the page is accessed via a `GET` request. If, however, the route is accessed via a `POST` request, it will collect the data from the form and store it to the database.
+By now you should be familiar with the difference between `GET` and `POST` requests. This route shows the user the `new_event.html` template if the page is accessed via a `GET` request. If, however, the route is accessed via a `POST` request, it will collect the data from the form and store it to the database.
 
 By now you should also be familiar with the `request` function in Flask. Here it is used to store each of the user-submitted values to a variable. Next the MongoDB collection which is the target for the data is specified, `events`, and new data is added to the collection as a JSON object via the `.insert()` method we saw before. Lastly, the user is redirected to the homepage.
 
