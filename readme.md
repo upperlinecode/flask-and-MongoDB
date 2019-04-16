@@ -570,7 +570,30 @@ def signup():
 
 Now that a user has signed up, they'll need a way to sign back in in the future. To account for this, we may want a new `login` route.
 
-This route should consult the MongoDB and find the user who is trying to log in. It will then compare the password submitted by the user to the password stored in the database. If the passwords are the same, a new session will be started for the user and the user will be routed to the index page. Otherwise, they will receive a message indicating an invalid username/password combination.
+This route should:
+
+1. Consult the MongoDB and find the user who is trying to log in.
+2. If the user is in the database, compare the password submitted by the user to the password stored in the database.
+    1. If the passwords are the same, a new session will be started for the user and the user will be routed to the index page.
+    2. Otherwise, they will receive a message indicating an invalid username/password combination.
+
+Here is an HTML snippet that corresponds to the login flow. Notice how it also includes a link to the `signup` route in case a user doesn't yet have an account.
+
+```html
+<h2>Log in</h2>
+<div>
+    <form action="/login" method="POST">
+        <label for="name">Name</label>
+        <input type="text" name="username">
+        <label for="password">Password</label>
+        <input type="password" name="password">
+        <input type="submit" value="Log In">
+    </form>
+    <p>No account? <a href="/signup">Sign up.</a></p>
+</div>
+```
+
+And here's a corresponding route.
 
 ```python
 @app.route('/login', methods=['POST'])
@@ -587,21 +610,7 @@ def login():
     return 'Invalid username/password combination'
 ```
 
-And here's an HTML snippet that corresponds to the route above. Notice how it includes a link to the `signup` route in case a user doesn't yet have an account.
-
-```html
-<h2>Log in</h2>
-<div>
-    <form action="/login" method="POST">
-        <label for="name">Name</label>
-        <input type="text" name="username">
-        <label for="password">Password</label>
-        <input type="password" name="password">
-        <input type="submit" value="Log In">
-    </form>
-    <p>No account? <a href="/signup">Sign up.</a></p>
-</div>
-```
+#### Extensions
 
 - Consider where you might want to include a form to "Log In"
 - Consider how you would only show the login form to a user who isn't logged in (e.g. doesn't yet have a session started).
