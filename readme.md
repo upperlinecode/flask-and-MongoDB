@@ -76,7 +76,7 @@ Read on for the steps and lessons to build that completed Flask + MongoDB app.
 
 ## Initial Setup
 
-> Although you may be tempted to dive into a mini-lesson about "What is a database?" because it's tempting to want to share every bit of background knowledge with students, our experience has taught us that students need to see **that** the app can work before they become interested in the nuances of **why** it works exactly as it does. So don't feel like you ought to spend much time on this concept your first time through.
+> Although you may be tempted to dive into a mini-lesson about "What is a database? What makes a good database?" because it's tempting to want to share every bit of background knowledge with students, our experience has taught us that students need to see **that** the app can work before they become interested in the nuances of **why** it works exactly as it does. So don't feel like you ought to spend much time on this concept your first time through.
 > 
 > We've also picked out a few other times in these lessons where you may be tempted to dive deep into a topic, but it may be better to reserve that enthusiasm.
 
@@ -105,6 +105,7 @@ In the Terminal:
 pip install flask-pymongo
 pip install dnspython
 ```
+> Remember to add the `--user` flag in [ide.cs50.io](https://ide.cs50.io).
 
 Once the cluster is created on MongoDB, we need to do three things to complete the database setup before we can connect to it from our app:
 
@@ -416,6 +417,7 @@ Before we write a new route, we'll want to make sure we've installed the `bson` 
 ```bash
 pip install bson
 ```
+> Remember to add the `--user` flag in [ide.cs50.io](https://ide.cs50.io).
 
 We'll need to add an import statement in our app, as well:
 
@@ -650,6 +652,7 @@ Formatting dates in python is done using the `datetime` module. `datetime` is al
 ```bash
 pip install datetime
 ```
+> Remember to add the `--user` flag in [ide.cs50.io](https://ide.cs50.io).
 
 Then import the `datetime` functions into your app:
 
@@ -705,6 +708,7 @@ To use environment variables, we first need to install the `python-dotenv` modul
 pip install os # if you haven't already
 pip install python-dotenv
 ```
+> Remember to add the `--user` flag in [ide.cs50.io](https://ide.cs50.io).
 
 And we need to include the `load_dotenv` function in our app:
 
@@ -778,6 +782,7 @@ To hash passwords, we'll use the `bcrypt` module:
 ```bash
 pip install bcrypt
 ```
+> Remember to add the `--user` flag in [ide.cs50.io](https://ide.cs50.io).
 
 And we need to import `bcrypt` into our app:
 
