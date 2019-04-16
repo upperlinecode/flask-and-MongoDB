@@ -492,8 +492,6 @@ To be able to use the `session` functionality, we need to store a secret key tha
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 ```
 
-> Read more about sessions and secret keys in the [Flask documentation](http://flask.pocoo.org/docs/1.0/quickstart/#sessions).
-
 Now that a session can be created, we can assign a value to a property of the `session` variable in order to store that value:
 
 ```python
@@ -514,6 +512,8 @@ if 'username' in session:
 	# some code here
 ```
 
+> Read more about sessions and secret keys in the [Flask documentation](http://flask.pocoo.org/docs/1.0/quickstart/#sessions).
+
 ### New User Sign Up
 
 In order for a new user to sign up, a few things need to happen:
@@ -525,6 +525,20 @@ In order for a new user to sign up, a few things need to happen:
 5. To create the new user in the database, we can `.insert()` the `username` and `password` we get from the form.
 6. We then start a new session with the `username` from the form.
 7. Lastly, we redirect the user to the homepage.
+
+Here's an HTML snippet we could use on `signup.html` to capture a username and password:
+
+```html
+<form action="/signup" method="POST">
+    <label for="name">Name</label>
+    <input type="text" name="username">
+    <label for="password">Password</label>
+    <input type="password" name="password">
+    <input type="submit" value="Sign Up">
+</form>
+```
+
+And here's a corresponding route that can be used to handle signup data:
 
 ```python
 @app.route('/signup', methods=['POST', 'GET'])
@@ -544,19 +558,9 @@ def signup():
     return render_template('signup.html')
 ```
 
-And here's an HTML snippet that corresponds to the route above:
-
-```html
-<form action="/signup" method="POST">
-    <label for="name">Name</label>
-    <input type="text" name="username">
-    <label for="password">Password</label>
-    <input type="password" name="password">
-    <input type="submit" value="Sign Up">
-</form>
-```
-
 > Since we don't (yet) have a way for a user to log out, you can clear the session cookie using your browser's Developer Tools.
+
+#### Extensions
 
 - Consider where you might want to show the user they are logged in.
 - Consider what else a user would expect to see when signing up.
