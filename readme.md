@@ -67,6 +67,7 @@ MONGO_PASSWORD="6zCs4vJtrzwkLBqL"
 - Lastly, execute `flask run` in the Terminal as before.
 
 > Test out how to submit an event, sign up, log in, view an event page, and log out.
+> 
 > Examine (the newly named) `routes.py` to see how each action is implemented.
 
 ### How'd You Make That?
