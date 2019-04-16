@@ -668,7 +668,7 @@ And also a new snippet for an HTML template:
 
 ## Reach Extensions
 
-Now that you have a sense of the basics, there are loads of directions you and students may want to take the framework you've built so far. Here, we touch on three possible reach extensions:
+Now that you have a sense of the basics, there are loads of directions you and students may want to take the framework you've built so far. Here we touch on three possible reach extensions:
 
 - [Date Formatting](#date-formatting)
 - [Environment Variables](#environment-variables)
@@ -697,7 +697,7 @@ There are two functions you may find useful for reformatting dates: `strptime` a
 
 `strptime` is short for "string parse time" and takes a string as an argument and returns a DateTime Object. It does this according to a format that you define by using variables that represent different parts of a date/time: e.g. `%d` is the day of the month as a zero-padded decimal number, and `%Y` is the year with century as a decimal number. The [documentation](https://docs.python.org/3.7/library/datetime.html#strftime-and-strptime-behavior) has the full list of options.
 
-So to convert the string `04-10-19` into a DateTime Object, we need to recognize that it's in the format of `MM-DD-YY` which would be represented as `%m-%d-%y`. Notice how the dashes as used in the representation just like they're used in the string. `strptime` takes the string and the representation as arguments to output a DateTime Object:
+So to convert the string `04-10-19` into a DateTime Object, we need to recognize that it's in the format of `MM-DD-YY` which would be represented as `%m-%d-%y`. Notice how the dashes are used in the representation just like they're used in the string. `strptime` takes the string and the representation as arguments to output a DateTime Object:
 
 ```python
 date = "04-10-19"
@@ -731,7 +731,7 @@ print(dateStr)
 
 Environment variables are used to protect sensitive usernames and passwords. By hiding credentials, it is much more difficult for anyone to gain unauthorized access to sensitive data.
 
-Credentials are listed in a file called `.env`, and that file is then named in a repository's `.gitignore` file. By including `.env` in the `.gitignore`, the `.env` file will not be uploaded and shared to github. Instead, we will be able to use the credentials when we develop in our local environment, and when we push to the cloud we'll need to make sure to securely store the credentials in the platform itself.
+Credentials are listed in a file called `.env`, and that should always then be listed in a repository's `.gitignore` file. By including `.env` in the `.gitignore`, the `.env` file will not be uploaded and shared to github. Instead, we will be able to use the credentials when we develop in our local environment, and when we push to the cloud we'll need to make sure to securely store the credentials in the platform itself.
 
 To use environment variables, we first need to install the `python-dotenv` module (and the `os` module) using the Terminal:
 
@@ -782,9 +782,13 @@ app.config['MONGO_URI'] = 'mongodb+srv://'+USER+':'+PASS+'@server-kxrbn.mongodb.
 
 So if someone were to see our code (on github or using other tools), they wouldn't be able to see our username and password.
 
-#### Environment Variables in Goorm
+#### Environment Variables in ide.cs50.io
 
-When you are building in Goorm, ...
+When you are building in [ide.cs50.io](https://ide.cs50.io), the default file structure does not show hidden/system files.
+
+Create a `.env` file as you would any other file, and save it to the top-level folder; when you save it, you won't actually see it in the list of files. To see the `.env` file, tap the gear in the folder structure and select "Show hidden files".
+
+You'll also see other system files that start with `.` such as `.flaskenv` and `.gitignore`.
 
 #### Environment Variables in Heroku
 
