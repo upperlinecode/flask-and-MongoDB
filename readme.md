@@ -23,7 +23,9 @@
 
 Now that you and your students have built an app using Flask, you might have recognized a need to store and retrieve data. For this, we're going to use a database called MongoDB.
 
-If you're just looking to run the demo code, this is a list of the packages you'll want to make sure you've installed. 
+If you're just looking to run the demo code, this is a list of the packages you'll want to make sure you've installed. If you're using your own development environment, these should work as written.
+
+> In ide.cs50.io, you may need to add a `--user` flag at the end of each `pip install`. 
 
 ```python
 pip install flask
@@ -41,13 +43,33 @@ Or all in one:
 pip install flask flask-pymongo dnspython bcrypt bson datetime python-dotenv
 ```
 
-To view a finished app, rename `routes-complete.py` to `routes.py` and then execute `flask run` in the Terminal as before.
+And you'll need to export these variables:
+
+```bash
+export FLASK_APP=main.py
+export FLASK_RUN_HOST=0.0.0.0
+export FLASK_RUN_PORT=8080
+export FLASK_DEBUG=1
+export LC_ALL=C.UTF-8
+export LANG=C.UTF-8
+```
+
+To view a finished app:
+
+- rename `routes-complete.py` to `routes.py` and then execute `flask run` in the Terminal as before. `routes.py` is a starter template for building up a Flask app using MongoDB.
+- create a `.env` file with these credentials:
+```bash
+MONGO_USERNAME="admin"
+MONGO_PASSWORD="6zCs4vJtrzwkLBqL"
+```
+
+`flask run` should spin up the completed app.
 
 Read on for the steps and lessons to build that completed Flask + MongoDB app.
 
-### Mini-Lesson: What is a Database?
-
-IS THIS SOMETHING WE WANT TO INCLUDE? STRUCTURED VS. UNSTRUCTURED, ETC.?
+> Although you may be tempted to dive into a mini-lesson about "What is a database?" because it's tempting to want to share every bit of background knowledge with students, our experience has taught us that students need to see **that** the app can work before they become interested in the nuances of **why** it works exactly as it does. So don't feel like you ought to spend much time on this concept your first time through.
+> 
+> We've also picked out a few other times in these lessons where you may be tempted to dive deep into a topic, but it may be better to reserve that enthusiasm.
 
 ## Initial Setup
 
@@ -121,11 +143,9 @@ When creating a user, you can set various privileges for that user. For this app
 
 Tap "Add User" to complete the creation of your first database user!
 
-### Mini-Lesson: What is an IP Address?
-
-IS THIS SOMETHING WE WANT TO INCLUDE? IPv4 vs. IPv7? ICANN? DNS? ETC.?
-
 #### Whitelist IP addresses
+
+> Resist the temptation to go too deep into "What is an IP Address?" your first time through.
 
 Now we need to let MongoDB know the IP addresses from which it is safe to access our database and to which it is safe to send data from the database.
 
@@ -260,11 +280,9 @@ By now you should be familiar with the different between `GET` and `POST` reques
 
 By now you should also be familiar with the `request` function in Flask. Here it is used to store each of the user-submitted values to a variable. Next the MongoDB collection which is the target for the data is specified, `events`, and new data is added to the collection as a JSON object via the `.insert()` method we saw before. Lastly, the user is redirected to the homepage.
 
-### Mini-Lesson: What is a Query?
-
-IS THIS SOMETHING WE WANT TO INCLUDE?
-
 ### Queries of MongoDB
+
+> Resist the temptation to go too deep into "What is a query?" your first time through.
 
 We've now seen how to write data to MongoDB, but we also want to read (and display) data from MongoDB. To do this, we will need to query, or request particular data from, MongoDB.
 
@@ -425,11 +443,9 @@ And an HTML snippet to show the filtered data:
 </div>
 ```
 
-### Mini-Lesson: What is a Session? What is a Cookie?
-
-IS THIS SOMETHING WE WANT TO INCLUDE?
-
 ### User Accounts & Sessions
+
+> Resist the temptation to go too deep into "What is a session? What is a cookie?" your first time through.
 
 A common feature of many apps is that they allow the creation of user accounts. To do this, a few things need to happen:
 
@@ -618,11 +634,9 @@ Now that you have a sense of the basics, there are loads of directions you and s
 - [Environment Variables](#environment-variables)
 - [Password Hashing](#password-hashing)
 
-### Mini-Lesson: What is a Date? What is a Time?
-
-IS THIS SOMETHING WE WANT TO INCLUDE? HOW COMPUTERS KEEP TIME?
-
 ### Date Formatting
+
+> Resist the temptation to go too deep into "What is a date? What is a time?" your first time through.
 
 Formatting dates in python is done using the `datetime` module. `datetime` is already built into Python 3, but you may want to ensure it's installed using:
 
@@ -670,11 +684,9 @@ print(dateStr)
 
 - [Python 3.7 datetime Documentation](https://docs.python.org/3.7/library/datetime.html)
 
-### Mini-Lesson: What is an Environment Variable?
-
-IS THIS SOMETHING WE WANT TO INCLUDE?
-
 ### Environment Variables
+
+> Resist the temptation to go too deep into "What is an environment variable?" your first time through.
 
 Environment variables are used to protect sensitive usernames and passwords. By hiding credentials, it is much more difficult for anyone to gain unauthorized access to sensitive data.
 
@@ -744,11 +756,9 @@ For your deployed app to function on heroku, you'll need to access...
 
 - [python-dotenv on GitHub](https://github.com/theskumar/python-dotenv)
 
-### Mini-Lesson: What is a Hash? How to Best Store Passwords?
-
-IS THIS SOMETHING WE WANT TO INCLUDE?
-
 ### Password Hashing
+
+> Resist the temptation to go too deep into "What is a hash? What's the best way to store passwords?" your first time through.
 
 So far, we've asked users to come up with a username and a password, however we're storing that password in plaintext in our database. Storing passwords in plaintext is **highly insecure** because if someone who isn't authorized gains access to the database, they would have access to all users' passwords.
 

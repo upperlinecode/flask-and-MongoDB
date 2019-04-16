@@ -38,8 +38,8 @@ def index():
 
 from flask_pymongo import PyMongo
 
-app.config['MONGO_DBNAME'] = 'test-mongo' # name of database
-app.config['MONGO_URI'] = 'mongodb+srv://'+USER+':'+PASSWORD+'@jeffreylancaster-kxrbn.mongodb.net/test-mongo?retryWrites=true' # Command Line Tools, Connect Instructions, Secure Database (Whitelist IP), connection method (Connect Your Application) > Copy > replace password w/ password
+app.config['MONGO_DBNAME'] = 'community-board' # name of database
+app.config['MONGO_URI'] = 'mongodb+srv://'+USER+':'+PASSWORD+'@cluster0-ya1yr.mongodb.net/community-board?retryWrites=true' # Command Line Tools, Connect Instructions, Secure Database (Whitelist IP), connection method (Connect Your Application) > Copy > replace password w/ password
 # same for node.js > 3.0 and Python > 3.6
 
 mongo = PyMongo(app)
