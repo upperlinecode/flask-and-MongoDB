@@ -4,14 +4,15 @@
     1. [Show Me a Demo First](#show-me-a-demo-first)
     2. [How'd You Make That?](#howd-you-make-that)
 2. [Initial Setup](#initial-setup)
-    1. [Create a database](#create-a-database)
-    2. [Create a database user](#create-a-database-user)
-    3. [Whitelist IP addresses](#whitelist-ip-addresses)
-    4. [Connect to MongoDB](#connect-to-mongodb)
-    5. [Push Data to MongoDB](#push-data-to-mongodb)
-    6. [Queries of MongoDB](#queries-of-mongodb)
-    7. [Sorting and Limiting Query Results](#sorting-and-limiting-query-results)
-    8. [Push to Heroku](#push-to-heroku)
+    1. [Sign Up for MongoDB](#sign-up-for-mongodb)
+        1. [Create a database](#create-a-database)
+        2. [Create a database user](#create-a-database-user)
+        3. [Whitelist IP addresses](#whitelist-ip-addresses)
+    2. [Connect to MongoDB](#connect-to-mongodb)
+    3. [Push Data to MongoDB](#push-data-to-mongodb)
+    4. [Queries of MongoDB](#queries-of-mongodb)
+    5. [Sorting and Limiting Query Results](#sorting-and-limiting-query-results)
+    6. [Push to Heroku](#push-to-heroku)
 3. [Extensions](#extensions)
     1. [Individual Post Pages](#individual-post-pages)
     2. [User Accounts](#user-accounts)
@@ -84,6 +85,8 @@ Read on for the steps and lessons to build that completed Flask + MongoDB app.
 > Although you may be tempted to dive into a mini-lesson about "What is a database? What makes a good database?" because it's tempting to want to share every bit of background knowledge with students, our experience has taught us that students need to see **that** the app can work before they become interested in the nuances of **why** it works exactly as it does. So don't feel like you ought to spend much time on this concept your first time through.
 > 
 > We've also picked out a few other times in these lessons where you may be tempted to dive deep into a topic, but it may be better to reserve that enthusiasm.
+
+### Sign Up for MongoDB
 
 To get started using MongoDB as a database, you'll want to sign up for an Atlas (free) account at [mongodb.com](https://www.mongodb.com/). The sign up process is a bit lengthy, but it involves:
 
