@@ -568,16 +568,14 @@ def signup():
 
 ### Logging In
 
-Now that a user has signed up, they'll need a way to sign back in in the future. To account for this, we may want a new `login` route.
-
-This route should:
+Now that a user has signed up, they'll need a way to sign back in in the future. To account for this, we may want a new `login` route. This route should:
 
 1. Consult the MongoDB and find the user who is trying to log in.
 2. If the user is in the database, compare the password submitted by the user to the password stored in the database.
     1. If the passwords are the same, a new session will be started for the user and the user will be routed to the index page.
     2. Otherwise, they will receive a message indicating an invalid username/password combination.
 
-Here is an HTML snippet that corresponds to the login flow. Notice how it also includes a link to the `signup` route in case a user doesn't yet have an account.
+Here's an HTML snippet for a login. Notice how it also includes a link to the `signup` route in case a user doesn't yet have an account.
 
 ```html
 <h2>Log in</h2>
