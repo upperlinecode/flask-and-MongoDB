@@ -139,13 +139,13 @@ To create a database user, return to the Clusters overview by clicking on "Clust
 
 ![Security View in MongoDB Interface](screenshots/mongodb-6-create-database-user.png "Security View in MongoDB Interface")
 
-Notice the green button in the top-right corner that says "+ Add New User" - go ahead and tap that.
+Notice the green button in the top-right corner that says "+ ADD NEW USER" - go ahead and tap that.
 
 Choose a username, e.g. `admin` and (secure) password, e.g. `Ypzb8UvmWKXJsubU`, and make a note of the password you've selected.
 
-![Add New User in MongoDB Interface](screenshots/mongodb-7-add-new-user.png "Add New User in MongoDB Interface")
-
 > We suggest tapping "Autogenerate Secure Password" to create a compliant password. Then tap "Show" and copy-and-paste the password somewhere safe.
+
+![Add New User in MongoDB Interface](screenshots/mongodb-7-add-new-user.png "Add New User in MongoDB Interface")
 
 When creating a user, you can set various privileges for that user. For this app, we're just going to keep the default "Read and write to any database" permissions.
 
@@ -161,7 +161,7 @@ Still on the "Security" tab, you'll now see the user you just created. Tap the "
 
 ![Whitelist IP Address in MongoDB Interface](screenshots/mongodb-9-ip-whitelist.png "Whitelist IP Address in MongoDB Interface")
 
-Again, tap the green button in the top-right labeled "+ Add IP Address".
+Again, tap the green button in the top-right labeled "+ ADD IP ADDRESS".
 
 We're presented with an option to just add the current IP address, to allow access from anywhere, or to list a particular IP address. Since most students will want their app to be accessed by anyone anywhere (and since they should not be storing particularly sensitive data), it's ok to tap the "Allow Access from Anywhere" button. Add a comment, e.g. "Global access", then tap "Confirm".
 
@@ -171,7 +171,7 @@ We're presented with an option to just add the current IP address, to allow acce
 
 ### Connect to MongoDB
 
-To facilitate connecting to MongoDB, we'll be using the module we installed called Flask-PyMongo. Flask-PyMongo is a set of Python tools for interacting with MongoDB that have been wrapped to integrate well with Flask.
+To facilitate connecting to MongoDB, we'll be using the module we installed called [Flask-PyMongo](https://flask-pymongo.readthedocs.io/en/latest/). Flask-PyMongo is a set of Python tools for interacting with MongoDB that have been wrapped to integrate well with Flask.
 
 We've already installed the module, but we needed to import it to our app:
 
@@ -203,7 +203,7 @@ Because we're using Python 3.7, we want to select the "Python" driver and the ve
 
 ![Connect to Cluster in MongoDB Interface](screenshots/mongodb-13-connect-to-db.png "Connect to Cluster in MongoDB Interface")
 
-If you examine the URI closely, you'll notice that our user's username has been included in the URI, but the password is represented as `<password>`. Before we can connect to our database, we'll need to replace `<password>` with our password that we stored somewhere secure.
+If you examine the URI closely, you'll notice that our user's username has been included in the URI, as has the database name we previously created. The password, however, is represented as `<password>`. Before we can connect to our database, we'll need to replace `<password>` with our password that we stored somewhere secure.
 
 Setting the configuration parameters should now look like:
 
