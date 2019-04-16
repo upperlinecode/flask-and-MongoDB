@@ -840,7 +840,7 @@ heroku config:set GITHUB_USERNAME=joesmith
 ```
 
 Remove a config variable using:
-````bash
+```bash
 heroku config:unset GITHUB_USERNAME
 # Unsetting GITHUB_USERNAME and restarting myapp... done, v13
 ```
