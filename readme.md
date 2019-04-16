@@ -27,7 +27,7 @@ Now that you and your students have built an app using Flask, you might have rec
 
 If you've come just looking to run the demo code, this is a list of the packages you'll want to make sure you've installed. If you're using your own development environment, these should work as written.
 
-> In [ide.cs50.io](https://ide.cs50.io), you may need to add a `--user` flag at the end of each `pip install`. 
+> In [ide.cs50.io](https://ide.cs50.io), you may need to add a `--user` flag at the end of each: `pip install <package> --user`. 
 
 ```python
 pip install flask
@@ -56,16 +56,18 @@ export LC_ALL=C.UTF-8
 export LANG=C.UTF-8
 ```
 
-To view a finished app:
+To view the finished app:
 
-- create a `.env` file with these credentials:
+- First create a `.env` file with these credentials:
 ```bash
 MONGO_USERNAME="admin"
 MONGO_PASSWORD="6zCs4vJtrzwkLBqL"
 ```
-- rename the `routes.py` starter template to anything else, and rename `routes-complete.py` to `routes.py`. Then execute `flask run` in the Terminal as before.
+- Then rename the `routes.py` starter template to anything else, and rename `routes-complete.py` to `routes.py`.
+- Lastly, execute `flask run` in the Terminal as before.
 
-> Test out how to "Submit an Event", "Sign Up", "Log In", view an event page, and "Log Out". Examine (the newly named) `routes.py` to see how each action is implemented.
+> Test out how to submit an event, sign up, log in, view an event page, and log out.
+> Examine (the newly named) `routes.py` to see how each action is implemented.
 
 ### How'd You Make That?
 
