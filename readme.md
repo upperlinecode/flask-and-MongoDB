@@ -11,7 +11,7 @@
     2. [Connect to MongoDB](#connect-to-mongodb)
 3. [Push Data to MongoDB](#push-data-to-mongodb)
 4. [Queries of MongoDB](#queries-of-mongodb)
-    5. [Sorting and Limiting Query Results](#sorting-and-limiting-query-results)
+    1. [Sorting and Limiting Query Results](#sorting-and-limiting-query-results)
 6. [Push to Heroku](#push-to-heroku)
 3. [Extensions](#extensions)
     1. [Individual Post Pages](#individual-post-pages)
