@@ -89,6 +89,17 @@ def event(eventID):
     return render_template('event.html', event = event)
 
 
+# DELETE EVENT
+
+@app.route('/events/delete/<eventID>')
+
+def delete(eventID):
+    collection = mongo.db.events
+    event = collection.find_one_and_delete({'_id' : ObjectId(eventID)})
+
+    return redirect('/')
+
+
 # NEW USER SIGN UP
 
 @app.route('/signup', methods=['POST', 'GET'])

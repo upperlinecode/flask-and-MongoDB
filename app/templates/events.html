@@ -10,7 +10,7 @@
       <div class="event-list">
         <ul>
           {% for event in events %}
-            <li><a href="/events/{{event._id}}">{{ event.event.title() }} - {{ event.dateStr }}</a> {% if event.user %}(Posted by {{ event.user }}){% endif %} </li>
+            <li><a href="/events/{{event._id}}">{{ event.event.title() }} - {{ event.dateStr }}</a> {% if event.user %}(Posted by {{ event.user }}){% endif %} <a href="/events/delete/{{event._id}}">[x]</a></li>
           {% endfor %}
         </ul>
         <a href="/events/new">Submit an Event</a>
