@@ -1,14 +1,14 @@
 # Build a Community Board with Flask and MongoDB (with a little help from PyMongo)
 ## Extensions
 
-3. [Extensions](#extensions)
+1. [Extensions](#extensions)
     1. [Individual Post Pages](#individual-post-pages)
     2. [User Accounts](#user-accounts)
         1. [New User Sign Up](#new-user-sign-up)
         2. [Logging In](#logging-in)
         3. [Logging Out](#logging-out)
         4. [Gated Pages](#gated-pages)
-4. [Reach Extensions](#reach-extensions)
+2. [Reach Extensions](#reach-extensions)
     1. [Date Formatting](#date-formatting)
     2. [Environment Variables](#environment-variables)
     3. [Password Hashing](#password-hashing)
