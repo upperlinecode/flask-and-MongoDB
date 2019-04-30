@@ -2,3 +2,5 @@ __pycache__/*
 .env
 /app/__pycache__/*
 *.pyc
+.DS_Store
+*/.DS_Store
